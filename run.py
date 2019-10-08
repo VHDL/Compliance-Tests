@@ -2,6 +2,7 @@ from os.path import join, dirname
 from vunit import VUnit, VUnitCLI
 from vunit.simulator_factory import SIMULATOR_FACTORY
 from vunit.test_report import TestReport, PASSED, FAILED
+from vunit import ostools
 
 root = dirname(__file__)
 vhdl_standard = (
@@ -16,23 +17,37 @@ ui = VUnit.from_args(args)
 lib = ui.add_library("lib")
 lib.add_source_files(join(root, "*.vhd"))
 
-# Run all testbenches in isolation to handle failure to compile
+# Run all tests in isolation to handle failure to compile
 test_report = TestReport()
-test_report.set_expected_num_tests(len(lib.get_test_benches()))
 
+total_start_time = ostools.get_time()
+n_tests = 0
 for tb in lib.get_test_benches():
-    args.test_patterns = ["*%s*" % tb.name]
-    ui = VUnit.from_args(args, vhdl_standard=vhdl_standard)
-    lib = ui.add_library("lib")
-    lib.add_source_files(join(root, "*.vhd"))
+    tests = tb.get_tests()
+    if not tests:
+        test_names = ["all"]
+    else:
+        test_names = [test.name for test in tests]
 
-    try:
-        ui.main()
-    except SystemExit as ex:
-        if ex.code == 0:
-            test_report.add_result(tb.name, PASSED, 0, None)
-        else:
-            test_report.add_result(tb.name, FAILED, 0, None)
+    for test_name in test_names:
+        test_start_time = ostools.get_time()
+        n_tests += 1
+        full_test_name = "%s.%s.%s" % (tb.library.name, tb.name, test_name)
+        args.test_patterns = [full_test_name]
+        ui = VUnit.from_args(args, vhdl_standard=vhdl_standard)
+        lib = ui.add_library("lib")
+        lib.add_source_files(join(root, "*.vhd"))
+
+        try:
+            ui.main()
+        except SystemExit as ex:
+            tb_time = ostools.get_time() - test_start_time
+            if ex.code == 0:
+                test_report.add_result(full_test_name, PASSED, tb_time, None)
+            else:
+                test_report.add_result(full_test_name, FAILED, tb_time, None)
 
 print("\nCompliance test completed:\n")
+test_report.set_expected_num_tests(n_tests)
+test_report.set_real_total_time(ostools.get_time() - total_start_time)
 test_report.print_str()
