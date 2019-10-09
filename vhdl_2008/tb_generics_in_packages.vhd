@@ -1,4 +1,4 @@
-package generic_pkg is
+package generic_pkg_2 is
   generic (
     value : integer);
 
@@ -6,7 +6,7 @@ package generic_pkg is
 
 end package;
 
-package my_pkg is new work.generic_pkg
+package my_pkg_2 is new work.generic_pkg_2
   generic map (
     value => 17);
 
@@ -24,7 +24,7 @@ begin
   begin
     test_runner_setup(runner, runner_cfg);
 
-    check_equal(work.my_pkg.my_value, 17);
+    check_equal(work.my_pkg_2.my_value, 17);
 
     test_runner_cleanup(runner);
     wait;

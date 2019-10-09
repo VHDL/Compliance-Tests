@@ -1,4 +1,4 @@
-package generic_pkg is
+package generic_pkg_3 is
   generic (
     type my_type);
 
@@ -8,7 +8,7 @@ package generic_pkg is
 
 end package;
 
-package body generic_pkg is
+package body generic_pkg_3 is
 
   function echo (
     constant value : my_type)
@@ -17,9 +17,9 @@ package body generic_pkg is
     return value;
   end function echo;
 
-end package body generic_pkg;
+end package body generic_pkg_3;
 
-package my_pkg is new work.generic_pkg
+package my_pkg_3 is new work.generic_pkg_3
   generic map (
     my_type => integer);
 
@@ -37,7 +37,7 @@ begin
   begin
     test_runner_setup(runner, runner_cfg);
 
-    check_equal(work.my_pkg.echo(17), 17);
+    check_equal(work.my_pkg_3.echo(17), 17);
 
     test_runner_cleanup(runner);
     wait;

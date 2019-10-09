@@ -1,4 +1,4 @@
-package generic_pkg is
+package generic_pkg_1 is
   generic (
     function operation (value: integer) return integer);
 
@@ -8,7 +8,7 @@ package generic_pkg is
     return integer;
 end package;
 
-package body generic_pkg is
+package body generic_pkg_1 is
   function repeat (
     constant value : integer;
     constant n_times : positive)
@@ -21,7 +21,7 @@ package body generic_pkg is
 
     return return_value;
   end;
-end package body generic_pkg;
+end package body generic_pkg_1;
 
 package operations_pkg is
   function square (
@@ -38,7 +38,7 @@ package body operations_pkg is
   end;
 end package body operations_pkg;
 
-package my_pkg is new work.generic_pkg
+package my_pkg_1 is new work.generic_pkg_1
   generic map (
     operation => work.operations_pkg.square);
 
@@ -56,7 +56,7 @@ begin
   begin
     test_runner_setup(runner, runner_cfg);
 
-    check_equal(work.my_pkg.repeat(3, 2), 81);
+    check_equal(work.my_pkg_1.repeat(3, 2), 81);
 
     test_runner_cleanup(runner);
     wait;
