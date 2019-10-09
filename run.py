@@ -1,8 +1,28 @@
 from os.path import join, dirname
+from fnmatch import fnmatch
+from functools import reduce
 from vunit import VUnit, VUnitCLI
 from vunit.simulator_factory import SIMULATOR_FACTORY
 from vunit.test_report import TestReport, PASSED, FAILED
 from vunit import ostools
+
+
+def add_testbenches(ui):
+    vhdl_2008 = ui.add_library("vhdl_2008")
+    vhdl_2019 = ui.add_library("vhdl_2019")
+    vhdl_2008.add_source_files(join(root, "vhdl_2008", "*.vhd"))
+    vhdl_2019.add_source_files(join(root, "vhdl_2019", "*.vhd"))
+
+    return vhdl_2008.get_test_benches() + vhdl_2019.get_test_benches()
+
+
+def match(name, patterns):
+    return reduce(
+        lambda found_match, pattern: found_match | fnmatch(name, pattern),
+        patterns,
+        False,
+    )
+
 
 root = dirname(__file__)
 vhdl_standard = (
@@ -13,16 +33,15 @@ vhdl_standard = (
 cli = VUnitCLI()
 args = cli.parse_args()
 args.minimal = True
+original_test_patterns = args.test_patterns
 ui = VUnit.from_args(args)
-lib = ui.add_library("lib")
-lib.add_source_files(join(root, "*.vhd"))
+testbenches = add_testbenches(ui)
 
 # Run all tests in isolation to handle failure to compile
 test_report = TestReport()
-
-total_start_time = ostools.get_time()
 n_tests = 0
-for tb in lib.get_test_benches():
+total_start_time = ostools.get_time()
+for tb in testbenches:
     tests = tb.get_tests()
     if not tests:
         test_names = ["all"]
@@ -30,13 +49,15 @@ for tb in lib.get_test_benches():
         test_names = [test.name for test in tests]
 
     for test_name in test_names:
+        full_test_name = "%s.%s.%s" % (tb.library.name, tb.name, test_name)
+        if not match(full_test_name, original_test_patterns):
+            continue
+
         test_start_time = ostools.get_time()
         n_tests += 1
-        full_test_name = "%s.%s.%s" % (tb.library.name, tb.name, test_name)
         args.test_patterns = [full_test_name]
         ui = VUnit.from_args(args, vhdl_standard=vhdl_standard)
-        lib = ui.add_library("lib")
-        lib.add_source_files(join(root, "*.vhd"))
+        add_testbenches(ui)
 
         try:
             ui.main()
