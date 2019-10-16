@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - run: docker run --rm -tv $(pwd):/src -w /src ghdl/vunit:llvm python3 run.py
+    - run: docker run --rm -tv $(pwd):/src -w /src ghdl/vunit:llvm python3 run.py -v
 #    - uses: actions/upload-artifact@master
 #      with:
 #        name: <name of the resulting zipfile
