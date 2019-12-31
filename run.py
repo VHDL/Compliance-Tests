@@ -1,6 +1,6 @@
 from os.path import join, dirname
 from vunit import VUnit, VUnitCLI
-from vunit.simulator_factory import SIMULATOR_FACTORY
+from vunit.sim_if.factory import SIMULATOR_FACTORY
 from run_support import run_with_compile_errors
 
 root = dirname(__file__)

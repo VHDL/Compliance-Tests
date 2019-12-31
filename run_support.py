@@ -2,7 +2,7 @@ from os.path import join, dirname
 from vunit import VUnit
 from fnmatch import fnmatch
 from functools import reduce
-from vunit.test_report import TestReport, PASSED, FAILED
+from vunit.test.report import TestReport, PASSED, FAILED
 from vunit import ostools
 
 root = dirname(__file__)
