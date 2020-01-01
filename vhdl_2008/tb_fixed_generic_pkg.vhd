@@ -15,7 +15,7 @@ begin
   begin
     test_runner_setup(runner, runner_cfg);
 
-    check(work.my_fixed_pkg.CopyRightNotice = "Copyright 2008 by IEEE. All rights reserved.",
+    check(work.my_fixed_pkg.CopyRightNotice = "Copyright IEEE P1076 WG. Licensed Apache 2.0",
           "Invalid copyright notice");
 
     test_runner_cleanup(runner);
