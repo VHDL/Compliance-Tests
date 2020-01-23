@@ -1,3 +1,6 @@
+library ieee;
+  use ieee.std_logic_1164.all;
+
 package generic_pkg_2 is
   generic (
     value : integer;
@@ -5,6 +8,8 @@ package generic_pkg_2 is
     vector_value : std_logic_vector);
 
   constant my_value : integer := value;
+  constant my_bit_value : std_logic := bit_value;
+  constant my_vector_value : std_logic_vector := vector_value;
 
 end package;
 
