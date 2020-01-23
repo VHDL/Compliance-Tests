@@ -13,6 +13,9 @@ package generic_pkg_2 is
 
 end package;
 
+library ieee;
+  use ieee.std_logic_1164.all;
+
 package my_pkg_2 is new work.generic_pkg_2
   generic map (
     value => 17,
