@@ -1,16 +1,22 @@
-name: 'test'
+name: Test
+
 on:
   push:
   pull_request:
   schedule:
     - cron: '0 0 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [ Test ]
+
 jobs:
+
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - run: docker run --rm -tv $(pwd):/src -w /src ghdl/vunit:llvm python3 run.py
-#    - uses: actions/upload-artifact@master
-#      with:
-#        name: <name of the resulting zipfile
-#        path: <directory to zip and upload>
+
+    - uses: actions/checkout@v2
+
+    - uses: docker://ghdl/vunit:llvm
+      with:
+        args: python3 run.py
