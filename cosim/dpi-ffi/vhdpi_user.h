@@ -38,15 +38,15 @@ int vhGetArrayLow (void* array, int dimension);
 int vhGetArrayHigh (void* array, int dimension);
 int vhGetArrayIncrement (void* array, int dimension); /*+1 to, -1 downto*/
 /* Multi-dimensional array access */
-void vhGetBitArrayElement (int value, void* array, int dimensions, int index1, int index2, …);
-void vhPutBitArrayElement (int value, void* array, int dimensions, int index1, int index2, …);
-int vhGetStdLogicArrayElement (int value, void* array, int dimensions, int index1, int index2, …);
-void vhPutStdLogicArrayElement (int value, void* array, int dimensions, int index1, int index2, …);
-int vhGetIntegerArrayElement (int value, void* array, int dimensions, int index1, int index2, …);
-void vhPutIntegerArrayElement (int value, void* array, int dimensions, int index1, int index2, …);
-int vhGetRealArrayElement (int value, void* array, int dimensions, int index1, int index2, …);
-void vhPutRealVecElement (int value, void* array, int dimensions, int index1, int index2, …);
-void* vhGetArrayElementPtr(void* array, int dimensions, int index1, int index2, … ); /* other data types */
+void vhGetBitArrayElement (int value, void* array, int dimensions, int index1, int index2); //, …
+void vhPutBitArrayElement (int value, void* array, int dimensions, int index1, int index2); //, …
+int vhGetStdLogicArrayElement (int value, void* array, int dimensions, int index1, int index2); //, …
+void vhPutStdLogicArrayElement (int value, void* array, int dimensions, int index1, int index2); //, …
+int vhGetIntegerArrayElement (int value, void* array, int dimensions, int index1, int index2); //, …
+void vhPutIntegerArrayElement (int value, void* array, int dimensions, int index1, int index2); //, …
+int vhGetRealArrayElement (int value, void* array, int dimensions, int index1, int index2); //, …
+void vhPutRealArrayElement (int value, void* array, int dimensions, int index1, int index2); //, …
+void* vhGetArrayElementPtr(void* array, int dimensions, int index1, int index2); /* other data types */ //, …
 
 /* DPI instantiated scope (region) */
 typedef void* vhInstantiatedScope;
@@ -55,8 +55,8 @@ vhInstantiatedScope vhGetInstantiatedScope (void);
 /* Change scope, returns old scope */
 vhInstantiatedScope vhSetInstantiatedScope (vhInstantiatedScope newScope);
 /* returns path name of scope */
-vhGetNameFromScope (vhInstantiatedScope);
+char* vhGetNameFromScope (vhInstantiatedScope);
 /* returns scope from path name */
-vhGetScopeFromName (char* scopeName);
+vhInstantiatedScope vhGetScopeFromName (char* scopeName);
 /* Sets file name and line number of import call, else returns 0 */
 int vhGetCallerInfo (char** fileName, int* lineNumber);
