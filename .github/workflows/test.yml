@@ -20,3 +20,7 @@ jobs:
     - uses: docker://ghdl/vunit:llvm
       with:
         args: python3 run.py
+
+    - uses: docker://ghdl/vunit:llvm
+      with:
+        args: ./cosim/dpi-ffi/test/run.sh
