@@ -17,14 +17,17 @@ begin
       variable value : std_logic_vector(5 downto 0) := "000000";
    begin
       test_runner_setup(runner, runner_cfg);
+      show(display_handler, pass);
 
       while test_suite loop
-         if run("Literal downsize as hex width") then
+         if run("Test downsizing of hexadecimal literal") then
+            -- vunit: .LRM-2008_15_8
             value := 6x"0f";
-            check_equal(value, std_logic_vector'("001111"));
-         elsif run("Literal upsize as hex width") then
+            check_equal(value, std_logic_vector'("001111"), result("for 6x""0f"""));
+         elsif run("Test upsizing of hexadecimal literal") then
+            -- vunit: .LRM-2008_15_8
             value := 6x"5";
-            check_equal(value, std_logic_vector'("000101"));
+            check_equal(value, std_logic_vector'("000100"), result("for 6x""4""")); -- Fake a bug
          elsif run("Literal hex signed value extension") then
             value := 6Sx"a";
             check_equal(value, std_logic_vector'("111010"));

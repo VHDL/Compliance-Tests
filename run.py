@@ -17,9 +17,12 @@ if "keep_going" in args:
     args.keep_going = True
 
 ui = VUnit.from_args(args, vhdl_standard=vhdl_standard)
+
 vhdl_2008 = ui.add_library("vhdl_2008")
+vhdl_2008_basic = ui.add_library("vhdl_2008_basic")
 vhdl_2019 = ui.add_library("vhdl_2019")
 vhdl_2008.add_source_files(join(root, "vhdl_2008", "*.vhd"))
+vhdl_2008_basic.add_source_files(join(root, "vhdl_2008", "basic", "*.vhd"))
 vhdl_2019.add_source_files(join(root, "vhdl_2019", "*.vhd"))
 
 if "keep_going" in args:

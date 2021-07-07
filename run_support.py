@@ -23,6 +23,7 @@ def run_with_compile_errors(ui, args, vhdl_standard):
     n_tests = 0
     testbenches = (
         ui.library("vhdl_2008").get_test_benches()
+        + ui.library("vhdl_2008_basic").get_test_benches()
         + ui.library("vhdl_2019").get_test_benches()
     )
     total_start_time = ostools.get_time()
@@ -42,9 +43,12 @@ def run_with_compile_errors(ui, args, vhdl_standard):
             n_tests += 1
             args.test_patterns = [full_test_name]
             ui = VUnit.from_args(args, vhdl_standard=vhdl_standard)
+            ui.enable_location_preprocessing()
             vhdl_2008 = ui.add_library("vhdl_2008")
+            vhdl_2008_basic = ui.add_library("vhdl_2008_basic")
             vhdl_2019 = ui.add_library("vhdl_2019")
             vhdl_2008.add_source_files(join(root, "vhdl_2008", "*.vhd"))
+            vhdl_2008_basic.add_source_files(join(root, "vhdl_2008", "basic", "*.vhd"))
             vhdl_2019.add_source_files(join(root, "vhdl_2019", "*.vhd"))
 
             try:
