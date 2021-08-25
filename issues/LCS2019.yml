@@ -1,0 +1,421 @@
+LCS-2016-001:
+    title: "Partially Connected Vectors on Port Map"
+    body: |
+      Allow for vectors to be partially connected in the port map
+    mwe: |
+      ```vhdl :file:test.vhd
+      signal not_so_long_vector : std_logic_vector(15 downto 0);
+
+      component Some_Device is
+          port (
+              long_port : std_logic_vector(31 downto 0)
+          );
+      end component Some_Device;
+
+      U1 : Some_Device port map(
+          long_port(15 downto 0) => not_so_long_vector,
+          long_port(31 downto 16) => open
+      );
+      ```
+
+LCS-2016-002:
+    title: "Allow access and protected type parameters on function interfaces"
+    body: |
+      Allow access and protected type parameters on function interfaces
+    mwe:
+
+LCS-2016-004:
+    title: "Allow PT methods with AT and FT parms"
+    body: |
+      Allow Protected Type Method Parameters to be Access Types, Protected Types (functions), and File Types
+
+LCS-2016-006a:
+    title: "File IO / Textio updates"
+    body: |
+      Add new sub programs for file I/O
+    mwe:
+
+LCS-2016-006c:
+    title: "File IO / Directory I/O"
+    body: |
+      TextIO additions
+    mwe:
+
+LCS-2016-006e:
+    title: "Allow access to system environment variables (baseline)"
+    body: |
+      Allow access to system environment variables (baseline)
+    mwe: |
+      ```vhdl :file:test.vhd
+      -- Check a configuration file in the user's home directory
+      use std.env.all;
+      use std.textio.all;
+
+      impure function GetConfig return boolean is
+          file config : text;
+          variable home, data : line;
+          variable result : boolean;
+      begin
+          home := GETENV("HOME");
+          assert home /= null report "No HOME environment variable";
+          FILE_OPEN(config,
+              home.all & DIR_SEPARATOR &
+              ".config" & DIR_SEPARATOR &
+              "myapp.txt",
+              read_mode
+          );
+          READ_LINE(config, data);
+          READ(data, result);
+          FILE_CLOSE(config);
+          return result;
+      end function GetConfig;
+      ```
+
+LCS-2016-006f:
+    title: "Expose standard conditional analysis identifiers"
+    body: |
+      Expose standard conditional analysis identifiers
+    mwe:
+
+LCS-2016-007:
+    title: "Sequential Declaration Regions"
+    body: |
+      Sequential Declaration Regions
+    mwe:
+
+LCS-2016-007a:
+    title: "Sequential Declaration Regions - corresponding short form"
+    body: |
+
+    mwe:
+
+LCS-2016-011:
+    title: "Date/Time functions"
+    body: |
+
+    mwe:
+
+LCS-2016-012:
+    title: "'IMAGE and TO_STRING for composite types"
+    body: |
+
+    mwe:
+
+LCS-2016-014:
+    title: "Composites of Protected Types"
+    body: |
+
+    mwe:
+
+LCS-2016-014a:
+    title: "Pointers to Composites of Protected Types"
+    body: |
+
+    mwe:
+
+LCS-2016-015:
+    title: "Report Calling Path"
+    body: |
+
+    mwe:
+
+LCS-2016-015a:
+    title: "ReportCallingPath - Current File and Line by function"
+    body: |
+
+    mwe:
+
+LCS-2016-016:
+    title: "Anonymous Types"
+    body: |
+
+    mwe:
+
+LCS-2016-018:
+    title: "Attributes for Enumerated Types"
+    body: |
+
+    mwe:
+
+LCS-2016-018a:
+    title: "New attributes - 'index"
+    body: |
+
+    mwe:
+
+LCS-2016-018d:
+    title: "New attributes - 'designated_type"
+    body: |
+
+    mwe:
+
+LCS-2016-019:
+    title: "Inferring Constraints from Initial Values for Signals and Variables"
+    body: |
+
+    mwe:
+
+LCS-2016-023:
+    title: "Relax Library Requirement on Configurations"
+    body: |
+
+    mwe:
+
+LCS-2016-026c:
+    title: "LongIntegers"
+    body: |
+
+    mwe:
+
+LCS-2016-028:
+    title: "Selected names for types - implementation of external names for types"
+    body: |
+
+    mwe:
+
+LCS-2016-030:
+    title: "Garbage Collection"
+    body: |
+
+    mwe:
+
+LCS-2016-032:
+    title: "PATH_NAME and Shared Variables and Subprograms"
+    body: |
+
+    mwe:
+
+LCS-2016-033:
+    title: "Composition with Protected Types"
+    body: |
+
+    mwe:
+
+LCS-2016-034:
+    title: "Protected Types with Generic Clause"
+    body: |
+
+    mwe:
+
+LCS-2016-036a:
+    title: "Allow for conditional expressions in a declaration (baseline)"
+    body: |
+
+    mwe:
+
+LCS-2016-041:
+    title: "Record Introspection / Type Reflection"
+    body: |
+
+    mwe:
+
+LCS-2016-043:
+    title: "Attributes for PSL"
+    body: |
+
+    mwe:
+
+LCS-2016-045a:
+    title: "Interface - defines new mode view construct for composite interface objects"
+    body: |
+
+    mwe:
+
+LCS-2016-045c:
+    title: "Interface - 'CONVERSE for a mode view"
+    body: |
+
+    mwe:
+
+LCS-2016-047:
+    title: "Protected Type: Shared Variables On Entity Interface"
+    body: |
+
+    mwe:
+
+LCS-2016-049:
+    title: "Map Generics On Subprogram Call"
+    body: |
+
+    mwe:
+
+LCS-2016-050:
+    title: "API for Assert"
+    body: |
+
+    mwe:
+
+LCS-2016-055a:
+    title: "Syntax regularization - component declarations"
+    body: |
+
+    mwe:
+
+LCS-2016-059:
+    title: "Array Type Generics"
+    body: |
+
+    mwe:
+
+LCS-2016-059a:
+    title: "Allow ordering on any scalar array - related to Array Type Generics"
+    body: |
+
+    mwe:
+
+LCS-2016-061:
+    title: "Conditional compilation"
+    body: |
+
+    mwe:
+
+LCS-2016-070:
+    title: "Bidirectional Connections"
+    body: |
+
+    mwe:
+
+LCS-2016-071a:
+    title: "Extra optional semicolon at the end of interface_list"
+    body: |
+
+    mwe:
+
+LCS-2016-072b:
+    title: "Function Knows Return Vector Size"
+    body: |
+
+    mwe:
+
+LCS-2016-075:
+    title: "Closely related record types"
+    body: |
+
+    mwe:
+
+LCS-2016-082:
+    title: "Syntax regularization: empty records"
+    body: |
+
+    mwe:
+
+LCS-2016-086:
+    title: "All Interface Lists Can Be Ordered"
+    body: |
+
+    mwe:
+
+LCS-2016-094a:
+    title: "Conditional Return Statement"
+    body: |
+
+    mwe:
+
+LCS-2016-099:
+    title: "Extended Ranges"
+    body: |
+
+    mwe:
+
+ISAC-2016-PSL_main:
+    title: "PSL Harmonization - keywords"
+    body: |
+
+    mwe:
+
+ISAC-2016-PSL:
+    title: "PSL Harmonization - change 2005 to 2010"
+    body: |
+
+    mwe:
+
+ISAC_2016_1735_Encrypt:
+    title: "Encryption Updates for 1735"
+    body: |
+
+    mwe:
+
+ISAC-2016-I03:
+    title: "Signatures for formal generic subprograms in a generic association lists"
+    body: |
+
+    mwe:
+
+ISAC-2016-I04:
+    title: "Enhanced Generics In Attribute Specs"
+    body: |
+
+    mwe:
+
+ISAC-2016-I05:
+    title: "Repair example in Section 14.2"
+    body: |
+
+    mwe:
+
+ISAC-2016-I06:
+    title: "Repair example in Section 7.3.2.1"
+    body: |
+
+    mwe:
+
+ISAC-2016-I08:
+    title: "Repair LRM Section 16.8.2.4.3 Missing Paragraph Text"
+    body: |
+
+    mwe:
+
+ISAC-2016-I09:
+    title: "Repair example in Section 5.6.3"
+    body: |
+
+    mwe:
+
+ISAC-2016-I10:
+    title: "Bit String Literals Corner Cases"
+    body: |
+
+    mwe:
+
+ISAC-2016-I11:
+    title: "Fix Generate Statement"
+    body: |
+
+    mwe:
+
+ISAC-2016-I12:
+    title: "Forcing Out Ports"
+    body: |
+
+    mwe:
+
+ISAC-2016-I13:
+    title: "Precedence of Unary Operators"
+    body: |
+
+    mwe:
+
+ISAC-2016-I14:
+    title: "Strings from embedded identifiers"
+    body: |
+
+    mwe:
+
+ISAC-2016-I16:
+    title: "Repair Example in Section 23.21"
+    body: |
+
+    mwe:
+
+ISAC-2016-IEEEStdUpdates:
+    title: "Updating IEEE Standard references"
+    body: |
+
+    mwe:
+
+ISAC-2016-I17:
+    title: "LRM2008 Typographical Issues"
+    page: LRM2008TypographicalIssues
+    body: |
+
+    mwe:
