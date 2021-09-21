@@ -46,8 +46,7 @@ library vunit_lib;
 context vunit_lib.vunit_context;
 
 entity tb_function_generic_in_package is
-  generic (
-    runner_cfg : runner_cfg_t);
+  generic ( runner_cfg : runner_cfg_t );
 end entity;
 
 architecture tb of tb_function_generic_in_package is
