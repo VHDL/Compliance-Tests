@@ -16,7 +16,9 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - run: docker run --rm -tv $(pwd):/src -w /src ghdl/vunit:llvm python3 run.py
+    - uses: VUnit/vunit_action@master
+      with:
+        cmd: ./run.py
 
 #    - uses: actions/upload-artifact@master
 #      with:
