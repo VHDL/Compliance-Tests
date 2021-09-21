@@ -1,27 +1,69 @@
 #!/usr/bin/env python3
 
-from pathlib import Path
-from vunit import VUnit, VUnitCLI
+from vunit import VUnitCLI
 from vunit.sim_if.factory import SIMULATOR_FACTORY
-from run_support import vunit_from_args, run_with_compile_errors
+
+# To workaround while keep_going isn't supported
+from pathlib import Path
+from vunit import VUnit
+from fnmatch import fnmatch
+from functools import reduce
+from vunit.test.report import TestReport, PASSED, FAILED
+from vunit import ostools
+
 
 ROOT = Path(__file__).resolve().parent
 
-vhdl_standard = (
-    "2019" if SIMULATOR_FACTORY.select_simulator().name == "rivierapro" else "2008"
-)
 
+def vunit_from_args(args, vhdl_standard):
+    ui = VUnit.from_args(args, vhdl_standard=vhdl_standard)
+    for std in ["2008", "2019"]:
+        lib = f"vhdl_{std}"
+        ui.add_library(lib).add_source_files(ROOT / lib / "*.vhd")
+    return ui
+
+
+vhdl_standard = "2019" if SIMULATOR_FACTORY.select_simulator().name == "rivierapro" else "2008"
 args = VUnitCLI().parse_args()
+ui = vunit_from_args(args, vhdl_standard)
 
-# keep_going is a planned VUnit feature which adds support for dealing with testbenches
-# that don't compile
-if "keep_going" in args:
-    args.keep_going = True
+# Run all tests in isolation to handle failure to compile
+args.minimal = True
+original_test_patterns = args.test_patterns
+test_report = TestReport()
+n_tests = 0
+total_start_time = ostools.get_time()
+for tb in (
+    ui.library("vhdl_2008").get_test_benches()
+    + ui.library("vhdl_2019").get_test_benches()
+):
+    tests = tb.get_tests()
+    for test_name in [test.name for test in tests] if tests else ["all"]:
+        full_test_name = f"{tb.library.name!s}.{tb.name!s}.{test_name!s}"
+        if not reduce(
+            lambda found_match, pattern: found_match | fnmatch(full_test_name, pattern),
+            original_test_patterns,
+            False,
+        ):
+            continue
 
-UI = vunit_from_args(args, vhdl_standard)
+        test_start_time = ostools.get_time()
+        n_tests += 1
+        args.test_patterns = [full_test_name]
 
-if "keep_going" in args:
-    UI.main()
-else:
-    # Workaround while keep_going isn't supported
-    run_with_compile_errors(UI, args, vhdl_standard)
+        ui = vunit_from_args(args, vhdl_standard)
+
+        try:
+            ui.main()
+        except SystemExit as ex:
+            test_report.add_result(
+                full_test_name,
+                PASSED if ex.code == 0 else FAILED,
+                ostools.get_time() - test_start_time,
+                None
+            )
+
+print("\nCompliance test completed:\n")
+test_report.set_expected_num_tests(n_tests)
+test_report.set_real_total_time(ostools.get_time() - total_start_time)
+test_report.print_str()
