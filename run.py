@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from os.path import join, dirname
 from vunit import VUnit, VUnitCLI
 from vunit.sim_if.factory import SIMULATOR_FACTORY
