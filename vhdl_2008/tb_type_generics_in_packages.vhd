@@ -27,7 +27,7 @@ library vunit_lib;
 context vunit_lib.vunit_context;
 
 entity tb_type_generics_in_packages is
-  generic ( runner_cfg : runner_cfg_t );
+  generic ( runner_cfg : string );
 end entity;
 
 architecture tb of tb_type_generics_in_packages is

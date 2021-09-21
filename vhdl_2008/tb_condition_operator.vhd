@@ -4,7 +4,7 @@ context vunit_lib.vunit_context;
 library ieee;
 use ieee.std_logic_1164.all;
 entity tb_condition_operator is
-  generic ( runner_cfg : runner_cfg_t );
+  generic ( runner_cfg : string );
 end entity;
 
 architecture tb of tb_condition_operator is
