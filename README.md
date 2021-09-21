@@ -1,7 +1,5 @@
 <p align="center">
-  <a title="Travis CI" href="https://travis-ci.com/VHDL/Compliance-Tests"><img alt="Travis CI" src="https://img.shields.io/travis/com/VHDL/Compliance-Tests?longCache=true&label=test&logo=travis-ci&logoColor=e8ecef&branch=master"></a><!--
-  -->
-  <a title="'test' workflow Status" href="https://github.com/VHDL/Compliance-Tests/actions"><img alt="'test' workflow Status" src="https://github.com/VHDL/Compliance-Tests/workflows/test/badge.svg"></a><!--
+  <a title="'Test' workflow Status" href="https://github.com/VHDL/Compliance-Tests/actions?query=workflow%3ATest"><img alt="'Test' workflow Status" src="https://img.shields.io/github/workflow/status/VHDL/Compliance-Tests/Test?longCache=true&style=flat-square&label=Test&logo=github%20actions&logoColor=fff"></a><!--
   -->
 </p>
 

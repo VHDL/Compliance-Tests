@@ -1,3 +1,0 @@
-language: minimal
-services: docker
-script: docker run --rm -tv $(pwd):/src -w /src ghdl/vunit:llvm python3 /src/run.py

@@ -1,4 +1,4 @@
-name: 'test'
+name: Test
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
 
-  test:
+  Test:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,8 +19,3 @@ jobs:
     - uses: VUnit/vunit_action@master
       with:
         cmd: ./run.py
-
-#    - uses: actions/upload-artifact@master
-#      with:
-#        name: <name of the resulting zipfile
-#        path: <directory to zip and upload>
