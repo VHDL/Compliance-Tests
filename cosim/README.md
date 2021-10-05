@@ -16,5 +16,6 @@ This subdir contains tests and references for the VHDL Procedural Interface (VHP
 ## References
 
 - [wikipedia.org/wiki/Libffi](https://en.wikipedia.org/wiki/Libffi)
+  - [aguinet/dragonffi](https://github.com/aguinet/dragonffi)
 - [ktbarrett/hdltypes](https://github.com/ktbarrett/hdltypes)
   - [ktbarrett/pyhdltypes](https://github.com/ktbarrett/pyhdltypes)
