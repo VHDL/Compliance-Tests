@@ -1,4 +1,4 @@
-name: Test
+name: CoSim
 
 on:
   push:
@@ -9,13 +9,12 @@ on:
 
 jobs:
 
-  Test:
+  CoSim:
     runs-on: ubuntu-latest
-
     steps:
 
     - uses: actions/checkout@v2
 
-    - uses: VUnit/vunit_action@master
+    - uses: docker://ghdl/vunit:llvm
       with:
-        cmd: ./run.py
+        args: cosim/dpi-ffi/ghdl-vffi/test/run.py
