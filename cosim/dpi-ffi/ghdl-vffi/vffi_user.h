@@ -1,6 +1,7 @@
 #ifndef VFFI_TYPES_H
 #define VFFI_TYPES_H
 
+#include <assert.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -147,7 +148,7 @@ char* vffiNullTerminatedStringAccess(
 */
 
 // Convert a (null terminated) C string to a fat pointer of a line
-vffiLine_t* lineFromString(char *str) {
+vffiLine_t* lineFromString(const char *str) {
   uint32_t length = strlen(str);
   vffiLine_t *line = malloc(sizeof(vffiLine_t) + sizeof(char) * length);
   line->range.left = 1;
