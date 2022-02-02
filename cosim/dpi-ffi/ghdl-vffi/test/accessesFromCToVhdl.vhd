@@ -1,11 +1,18 @@
 use std.textio.line;
-library ieee;
-context ieee.ieee_std_context;
+library IEEE;
+context IEEE.IEEE_std_context;
 
-entity tb_AccessesFromCToVhdl is
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity Tb_AccessesFromCToVhdl is
+  generic (
+    runner_cfg : string;
+    tb_path    : string
+  );
 end;
 
-architecture arch of tb_AccessesFromCToVhdl is
+architecture arch of Tb_AccessesFromCToVhdl is
 
   type int_natural1D_t is array (natural range <>) of integer;
 
@@ -23,6 +30,7 @@ begin
 --    attribute foreign of passAccessesFromCToVhdl : procedure is "VHPIDIRECT passAccessesFromCToVhdl";
 
   begin
+    test_runner_setup(runner, runner_cfg);
 
     report "getLine: " & getLine.all severity note;
     assert getLine.all = "HELLO WORLD" severity failure;
@@ -30,6 +38,7 @@ begin
 --    passAccessesFromCToVhdl(
 --    );
 
+    test_runner_cleanup(runner);
     wait;
   end process;
 end;

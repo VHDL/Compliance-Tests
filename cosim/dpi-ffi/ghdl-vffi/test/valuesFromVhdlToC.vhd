@@ -2,7 +2,14 @@ use std.textio.line;
 library ieee;
 context ieee.ieee_std_context;
 
+library vunit_lib;
+context vunit_lib.vunit_context;
+
 entity tb_valuesFromVhdlToC is
+  generic (
+    runner_cfg : string;
+    tb_path    : string
+  );
 end;
 
 architecture arch of tb_valuesFromVhdlToC is
@@ -57,6 +64,7 @@ begin
     attribute foreign of passValuesFromVhdlToC : procedure is "VHPIDIRECT passValuesFromVhdlToC";
 
   begin
+    test_runner_setup(runner, runner_cfg);
 
     passValuesFromVhdlToC(
       v_char => 'k',
@@ -83,6 +91,7 @@ begin
       v_natural2D_real => ((0.1, 0.25, 0.5),(3.33, 4.25, 5.0))
     );
 
+    test_runner_cleanup(runner);
     wait;
   end process;
 end;
