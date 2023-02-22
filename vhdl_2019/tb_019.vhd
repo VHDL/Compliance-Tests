@@ -1,0 +1,3 @@
+-- LCS-2016-019: Inferring Constraints from Initial Values for Signals and Variables
+-- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_019
+-- TODO

@@ -1,0 +1,3 @@
+-- LCS-2016-015a: Standard functions to report current file name
+-- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_015a
+-- TODO

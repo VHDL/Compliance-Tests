@@ -1,0 +1,3 @@
+-- LCS-2016-036a: Allow for conditional expressions in a declaration (baseline)
+-- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_036a
+-- TODO

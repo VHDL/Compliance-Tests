@@ -1,0 +1,3 @@
+-- LCS-2016-018a: New Attribute - 'INDEX
+-- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_018a
+-- TODO

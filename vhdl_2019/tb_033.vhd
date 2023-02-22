@@ -1,0 +1,3 @@
+-- LCS-2016-033: Composition with Protected Types
+-- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_033
+-- TODO

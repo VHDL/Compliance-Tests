@@ -1,0 +1,3 @@
+-- LCS-2016-023: Relax Library Requirement on Confgiurations
+-- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_023
+-- TODO

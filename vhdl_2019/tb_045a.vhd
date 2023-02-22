@@ -1,0 +1,3 @@
+-- LCS-2016-045a: Interface - defines new mode view construct for composite interface objects
+-- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_045a
+-- TODO

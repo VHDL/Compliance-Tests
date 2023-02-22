@@ -1,0 +1,3 @@
+-- LCS-2016-047: Protected Type: Shared Variables on Entity Interface
+-- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_047
+-- TODO

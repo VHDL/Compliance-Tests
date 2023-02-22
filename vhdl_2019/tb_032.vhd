@@ -1,0 +1,3 @@
+-- LCS-2016-032: PATH_NAME and Shared Variables and Subprograms
+-- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_032
+-- TODO
