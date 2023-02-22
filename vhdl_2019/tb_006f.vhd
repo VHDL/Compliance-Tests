@@ -10,6 +10,7 @@ architecture arch of tb006f is
 begin
 
     tb : process
+    begin
         report VHDL_VERSION ;
         report TOOL_TYPE ;
         report TOOL_VENDOR ;

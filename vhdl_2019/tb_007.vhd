@@ -1,9 +1,9 @@
 -- LCS-2016-007: Sequential Declaration Regions
 -- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_007
-entity e is
+entity e007 is
 end entity ;
 
-architecture a of e is
+architecture a of e007 is
 
   function to_string (
     value      : in integer_vector
@@ -20,10 +20,13 @@ architecture a of e is
     end block ;
   end function to_string ;
 
+  constant int_vec : integer_vector := ( 1, 2, 3, 4 ) ;
+
 begin
 
   tb : process
   begin
+    report to_string(int_vec) ;
     std.env.stop ;
   end process;
 

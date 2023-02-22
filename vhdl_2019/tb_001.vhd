@@ -1,15 +1,14 @@
 -- LCS-2016-001: Partially Conneted Vectors on Port Map
 -- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_001
-
-entity e is
+entity e001 is
 end entity ;
 
-architecture a of e is
-    signal not_so_long_vector : std_logic_vector(15 downto 0);
+architecture a of e001 is
+    signal not_so_long_vector : bit_vector(15 downto 0);
 
     component Some_Device is
         port (
-            long_port : std_logic_vector(31 downto 0)
+            long_port : out bit_vector(31 downto 0)
         );
     end component Some_Device;
 
