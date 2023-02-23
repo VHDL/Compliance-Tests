@@ -20,10 +20,15 @@ def vunit_from_args(args, vhdl_standard):
     for std in ["2008", "2019"]:
         lib = f"vhdl_{std}"
         ui.add_library(lib).add_source_files(ROOT / lib / "*.vhd")
+    ui.set_compile_option("rivierapro.vcom_flags", ["-dbg"])
+    ui.set_compile_option("activehdl.vcom_flags", ["-dbg"])
+
     return ui
 
 
-vhdl_standard = "2019" if SIMULATOR_FACTORY.select_simulator().name == "rivierapro" else "2008"
+simulator_name = VUnit.from_argv().get_simulator_name()
+vhdl_standard = "2019" if simulator_name in ["rivierapro", "activehdl"] else "2008"
+print(f"Compiling with VHDL-{vhdl_standard}")
 args = VUnitCLI().parse_args()
 ui = vunit_from_args(args, vhdl_standard)
 
@@ -33,10 +38,7 @@ original_test_patterns = args.test_patterns
 test_report = TestReport()
 n_tests = 0
 total_start_time = ostools.get_time()
-for tb in (
-    ui.library("vhdl_2008").get_test_benches()
-    + ui.library("vhdl_2019").get_test_benches()
-):
+for tb in ui.library("vhdl_2008").get_test_benches() + ui.library("vhdl_2019").get_test_benches():
     tests = tb.get_tests()
     for test_name in [test.name for test in tests] if tests else ["all"]:
         full_test_name = f"{tb.library.name!s}.{tb.name!s}.{test_name!s}"
@@ -57,10 +59,7 @@ for tb in (
             ui.main()
         except SystemExit as ex:
             test_report.add_result(
-                full_test_name,
-                PASSED if ex.code == 0 else FAILED,
-                ostools.get_time() - test_start_time,
-                None
+                full_test_name, PASSED if ex.code == 0 else FAILED, ostools.get_time() - test_start_time, None
             )
 
 print("\nCompliance test completed:\n")
