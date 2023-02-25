@@ -3,7 +3,7 @@
 
 package pack is
 
-    record rec is
+    type rec is record
     end record ;
 
 end package;

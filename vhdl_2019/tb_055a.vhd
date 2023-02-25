@@ -3,8 +3,10 @@
 package pack055a is
 
     component test is
+      port (
         x   :   bit_vector ;
         y   :   integer ;
+      ) ;
     end ;
 
 end package ;
