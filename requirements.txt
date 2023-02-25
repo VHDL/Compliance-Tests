@@ -1,0 +1,1 @@
+vunit-hdl @ git+https://github.com/VUnit/vunit.git@v5.0.0
