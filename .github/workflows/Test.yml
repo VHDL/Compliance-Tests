@@ -12,9 +12,13 @@ jobs:
   Compliance:
     runs-on: ubuntu-latest
     steps:
-
     - uses: actions/checkout@v2
-
-    - uses: VUnit/vunit_action@master
+    - uses: ghdl/setup-ghdl-ci@master
       with:
-        cmd: ./run.py
+        backend: gcc
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - run: |
+        python -m pip install -r requirements.txt
+        python run.py -v -p10
