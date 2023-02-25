@@ -1,68 +1,34 @@
 #!/usr/bin/env python3
 
-from vunit import VUnitCLI
-from vunit.sim_if.factory import SIMULATOR_FACTORY
-
-# To workaround while keep_going isn't supported
+import sys
 from pathlib import Path
-from vunit import VUnit
-from fnmatch import fnmatch
-from functools import reduce
-from vunit.test.report import TestReport, PASSED, FAILED
-from vunit import ostools
+from vunit import VUnit, VUnitCLI
 
+root = Path(__file__).resolve().parent
 
-ROOT = Path(__file__).resolve().parent
-
-
-def vunit_from_args(args, vhdl_standard):
-    ui = VUnit.from_args(args, vhdl_standard=vhdl_standard)
-    for std in ["2008", "2019"]:
-        lib = f"vhdl_{std}"
-        ui.add_library(lib).add_source_files(ROOT / lib / "*.vhd")
-    ui.set_compile_option("rivierapro.vcom_flags", ["-dbg"])
-    ui.set_compile_option("activehdl.vcom_flags", ["-dbg"])
-
-    return ui
-
-
-simulator_name = VUnit.from_argv().get_simulator_name()
+simulator_name = VUnit.from_argv(compile_builtins=False).get_simulator_name()
 vhdl_standard = "2019" if simulator_name in ["rivierapro", "activehdl"] else "2008"
-print(f"Compiling with VHDL-{vhdl_standard}")
-args = VUnitCLI().parse_args()
-ui = vunit_from_args(args, vhdl_standard)
+print(f"Using VHDL-{vhdl_standard}")
 
-# Run all tests in isolation to handle failure to compile
-args.minimal = True
-original_test_patterns = args.test_patterns
-test_report = TestReport()
-n_tests = 0
-total_start_time = ostools.get_time()
-for tb in ui.library("vhdl_2008").get_test_benches() + ui.library("vhdl_2019").get_test_benches():
-    tests = tb.get_tests()
-    for test_name in [test.name for test in tests] if tests else ["all"]:
-        full_test_name = f"{tb.library.name!s}.{tb.name!s}.{test_name!s}"
-        if not reduce(
-            lambda found_match, pattern: found_match | fnmatch(full_test_name, pattern),
-            original_test_patterns,
-            False,
-        ):
-            continue
+cli = VUnitCLI()
+args = cli.parse_args()
+args.keep_compiling = True
+ui = VUnit.from_args(
+    args=args, compile_builtins=False, vhdl_standard="2019" if simulator_name in ["rivierapro", "activehdl"] else "2008"
+)
+ui.add_vhdl_builtins()
 
-        test_start_time = ostools.get_time()
-        n_tests += 1
-        args.test_patterns = [full_test_name]
+for std in ["2008", "2019"]:
+    lib = f"vhdl_{std}"
+    ui.add_library(lib).add_source_files(root / lib / "*.vhd")
 
-        ui = vunit_from_args(args, vhdl_standard)
+# The VHDL-2019 call path feature doesn't work well with Aldec's simulators
+# unless the code is compiled with the debug option.
+ui.set_compile_option("rivierapro.vcom_flags", ["-dbg"])
+ui.set_compile_option("activehdl.vcom_flags", ["-dbg"])
 
-        try:
-            ui.main()
-        except SystemExit as ex:
-            test_report.add_result(
-                full_test_name, PASSED if ex.code == 0 else FAILED, ostools.get_time() - test_start_time, None
-            )
-
-print("\nCompliance test completed:\n")
-test_report.set_expected_num_tests(n_tests)
-test_report.set_real_total_time(ostools.get_time() - total_start_time)
-test_report.print_str()
+# Mark a test run as successful even if failing tests are found.
+try:
+    ui.main()
+except SystemExit:
+    sys.exit(0)
