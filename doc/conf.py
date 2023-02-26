@@ -81,7 +81,7 @@ intersphinx_mapping = {
 
 extlinks = {
     "wikipedia": ("https://en.wikipedia.org/wiki/%s", None),
-    "awesome": ("https://hdl.github.io/awesome/items/%s", "%s"),
+    "gl": ("https://gitlab.com/%s", "gl:%s"),
     "gh": ("https://github.com/%s", "gh:%s"),
     "ghsharp": ("https://github.com/VHDL/Compliance-Tests/issues/%s", "#%s"),
     "ghissue": ("https://github.com/VHDL/Compliance-Tests/issues/%s", "issue #%s"),
