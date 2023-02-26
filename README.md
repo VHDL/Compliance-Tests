@@ -20,3 +20,4 @@
 
 - Tracking:
   - [[ghdl/ghdl#1958] Tracking issue: VHDL-2019 support](https://github.com/ghdl/ghdl/issues/1958)
+  - [nickg.me.uk/nvc/features.html](https://www.nickg.me.uk/nvc/features.html)
