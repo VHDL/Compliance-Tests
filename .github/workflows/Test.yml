@@ -12,6 +12,13 @@ jobs:
 
   Compliance:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        backend:
+          - mcode
+          - llvm
+          - gcc
 
     steps:
 
@@ -19,7 +26,7 @@ jobs:
 
       - uses: ghdl/setup-ghdl-ci@master
         with:
-          backend: gcc
+          backend: ${{ matrix.backend }}
 
       - uses: actions/setup-python@v4
         with:
