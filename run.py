@@ -6,16 +6,12 @@ from vunit import VUnit, VUnitCLI
 
 root = Path(__file__).resolve().parent
 
-simulator_name = VUnit.from_argv(compile_builtins=False).get_simulator_name()
-vhdl_standard = "2019" if simulator_name in ["rivierapro", "activehdl"] else "2008"
-print(f"Using VHDL-{vhdl_standard}")
+ui = VUnit.from_argv(compile_builtins=False, vhdl_standard="2008")
 
-cli = VUnitCLI()
-args = cli.parse_args()
-args.keep_compiling = True
-ui = VUnit.from_args(
-    args=args, compile_builtins=False, vhdl_standard="2019" if simulator_name in ["rivierapro", "activehdl"] else "2008"
-)
+if ui.get_simulator_name() in ["rivierapro", "activehdl"]:
+    ui = VUnit.from_argv(compile_builtins=False, vhdl_standard="2019")
+    print("Using VHDL-2019")
+
 ui.add_vhdl_builtins()
 
 for std in ["2008", "2019"]:

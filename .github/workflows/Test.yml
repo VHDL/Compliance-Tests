@@ -21,4 +21,4 @@ jobs:
         python-version: 3.9
     - run: |
         python -m pip install -r requirements.txt
-        python run.py -v -p10
+        python run.py -k -v -p10
