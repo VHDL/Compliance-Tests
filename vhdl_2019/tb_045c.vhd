@@ -19,3 +19,23 @@ package pack045c is
     alias slave is master'converse ;
 
 end package ;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_interface_converse is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_interface_converse is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-045c: Interface - 'CONVERSE");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

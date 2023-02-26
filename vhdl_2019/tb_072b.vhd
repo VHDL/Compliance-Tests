@@ -25,3 +25,23 @@ package body pack072b is
     end function ;
 
 end package body ;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_function_knows_return_vector_size is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_function_knows_return_vector_size is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-072b: Function knows return vector size");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

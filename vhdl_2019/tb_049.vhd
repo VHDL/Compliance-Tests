@@ -67,3 +67,23 @@ begin
     end process ;
 
 end architecture ;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_map_generics_on_subprogram_call is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_map_generics_on_subprogram_call is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-049: Map Generics on Subprogram Call");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

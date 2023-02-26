@@ -22,3 +22,23 @@ package pack018 is
     signal rev_copy : thingmap_t(thingmap_colors'reverse_range) ;
 
 end package ;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_enumerated_type_attributes is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_enumerated_type_attributes is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-018: Enumerated Type Attributes");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

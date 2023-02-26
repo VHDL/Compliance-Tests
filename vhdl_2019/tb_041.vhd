@@ -130,3 +130,23 @@ package body pack041 is
     end function;
 
 end package body ;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_record_introspection_type_reflection is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_record_introspection_type_reflection is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-041: Record Introspection/Type Reflection");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

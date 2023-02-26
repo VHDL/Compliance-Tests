@@ -19,3 +19,22 @@ package pack034 is
 
 end package;
 
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_protected_types_with_generic_clause is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_protected_types_with_generic_clause is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-034: Protected Types with Generic Clause");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

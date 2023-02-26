@@ -17,3 +17,23 @@ package pack045a is
     end view ;
 
 end package ;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_interface_mode_view is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_interface_mode_view is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-045a: Interface - defined a new mode view construct for composite interface objects");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

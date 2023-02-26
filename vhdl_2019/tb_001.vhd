@@ -20,3 +20,23 @@ begin
     );
 
 end architecture ;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_partially_connected_vectors_on_port_map is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_partially_connected_vectors_on_port_map is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-001: Partially Conneted Vectors on Port Map.");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

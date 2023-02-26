@@ -71,3 +71,23 @@ begin
     U_e047b : entity work.e047b port map ( y => var ) ;
 
 end architecture ;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_protected_type_shared_variables_on_entity_interface is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_protected_type_shared_variables_on_entity_interface is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-047: Protected Type Shared Variables on Entity Interface");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

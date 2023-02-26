@@ -44,3 +44,23 @@ begin
     --ad <= a_t(d) ; -- invalid - elements
 
 end architecture ;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_closely_related_record_types is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_closely_related_record_types is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-075: Closely Related Record Types");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

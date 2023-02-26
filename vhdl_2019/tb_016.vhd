@@ -22,3 +22,23 @@ entity E2_016 is
     B : Anonymous2
   ) ;
 end entity ;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_anonymous_types is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_anonymous_types is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-016: Anonymous Types");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

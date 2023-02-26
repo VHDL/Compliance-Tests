@@ -6,3 +6,23 @@ entity e071a is
     b   :   out integer ;
   ) ;
 end entity ;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_extra_optional_semicolon_on_interface_list is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_extra_optional_semicolon_on_interface_list is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-071a: Extra optional semicolon at the end of interface list");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

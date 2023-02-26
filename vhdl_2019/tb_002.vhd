@@ -32,3 +32,23 @@ package body pack002 is
     end protected body ;
 
 end package body ;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_allow_access_and_protected_type_params_on_func_interfaces is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_allow_access_and_protected_type_params_on_func_interfaces is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("Running a VUnit test for 'LCS-2016-002: Allow access and protected type parameters on function interfaces'.");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

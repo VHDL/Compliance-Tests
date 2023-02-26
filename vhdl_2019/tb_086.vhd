@@ -6,3 +6,23 @@ entity E086 is
     port (P1: STRING(G3 to G4); P2: STRING(P1'RANGE); P3: P1'SUBTYPE);
     procedure X (Y1, Y2: INTEGER; Y3: INTEGER range Y1 to Y2; Y4: Y1'SUBTYPE);
 end E086;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_all_interface_lists_can_be_ordered is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_all_interface_lists_can_be_ordered is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-086: All interface lists can be ordered");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;

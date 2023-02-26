@@ -22,3 +22,23 @@ begin
     end process ;
 
 end architecture ;
+
+--
+
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity tb_inferring_constraints_from_initial_values_for_signals_and_variables is
+  generic ( runner_cfg : string );
+end entity;
+
+architecture tb of tb_inferring_constraints_from_initial_values_for_signals_and_variables is
+begin
+  test_runner: process is
+  begin
+    test_runner_setup(runner, runner_cfg);
+    info("LCS-2016-019: Inferring Constraints from Initial Values for Signals and Variables");
+    test_runner_cleanup(runner);
+    wait;
+  end process test_runner;
+end architecture tb;
