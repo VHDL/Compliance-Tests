@@ -14,3 +14,4 @@ and `VHDL 2019 <https://standards.ieee.org/standard/1076-2019.html>`__ features.
 
   References
   License
+  Doc-License
