@@ -14,9 +14,20 @@ begin
 
     tb : process
         constant fname : string := "test006a.txt";
+        variable status : file_open_status ;
         file f : text ;
     begin
-        file_open(f, fname, READ_WRITE_MODE) ;
+        `if MODE="CHECK_STATUS" then
+            -- Works in Riviera-PRO
+            file_open(status, f, fname, READ_WRITE_MODE) ;
+            if status /= OPEN_OK then
+                report "Could not open " & fname ;
+                std.env.stop ;
+            end if ;
+        `else
+            -- Doesn't work in Riviera-PRO
+            file_open(f, fname, READ_WRITE_MODE);
+        `end
         report "  state     : " & to_string(file_state(f)) ;
         report "  mode      : " & to_string(file_mode(f)) ;
         report "  size      : " & to_string(file_size(f)) ;

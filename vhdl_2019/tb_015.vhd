@@ -14,6 +14,7 @@ begin
     begin
         path := get_call_path ;
         for idx in path'range loop
+            -- NOTE: Riviera-PRO needs -dbg flag during vcom for this string to be populated correctly
             report "call path   : " & to_string(path(idx)) ;
             report "  name      : " & path(idx).name.all ;
             report "  file_name : " & path(idx).file_name.all ;

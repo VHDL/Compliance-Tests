@@ -4,11 +4,11 @@
 library std ;
 use     std.reflection.all ;
 
-package pack is
+package pack041 is
     impure function to_string(variable value : value_mirror) return string ;
 end package;
 
-package body pack is
+package body pack041 is
 
     -- can create a string for any value
     impure function to_string(variable value : VALUE_MIRROR) return STRING is

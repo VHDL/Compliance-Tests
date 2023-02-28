@@ -19,13 +19,13 @@ begin
         variable elapsed_time : real ;
     begin
         start_time := epoch ;
-        write(l, "Local Time        : " & to_string(LOCALTIME)) ;
-        write(l, "Local Time+       : " & to_string(LOCALTIME,5)) ;
-        write(l, "Local Epoch Time  : " & to_string(LOCALTIME(start_time))) ;
-        write(l, "Local GM Time     : " & to_string(LOCALTIME(GMTIME))) ;
-        write(l, "GM Time           : " & to_string(GMTIME)) ;
-        write(l, "GM Epoch Time     : " & to_string(GMTIME(start_time))) ;
-        write(l, "GM Local TIme     : " & to_string(GMTIME(LOCALTIME))) ;
+        write(l, "Local Time        : " & to_string(LOCALTIME)&LF) ;
+        write(l, "Local Time+       : " & to_string(LOCALTIME,5)&LF) ;
+        write(l, "Local Epoch Time  : " & to_string(LOCALTIME(start_time))&LF) ;
+        write(l, "Local GM Time     : " & to_string(LOCALTIME(GMTIME))&LF) ;
+        write(l, "GM Time           : " & to_string(GMTIME)&LF) ;
+        write(l, "GM Epoch Time     : " & to_string(GMTIME(start_time))&LF) ;
+        write(l, "GM Local TIme     : " & to_string(GMTIME(LOCALTIME))&LF) ;
         elapsed_time := epoch - start_time ;
         write(l, "Test duration     : " & to_string(elapsed_time) & " seconds") ;
         writeline(output, l) ;

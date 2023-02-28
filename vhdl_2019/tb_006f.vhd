@@ -2,10 +2,10 @@
 -- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_006f
 use std.env.all ;
 
-entity tb006f is
+entity e006f is
 end entity ;
 
-architecture arch of tb006f is
+architecture arch of e006f is
 
 begin
 
