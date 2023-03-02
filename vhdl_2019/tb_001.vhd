@@ -1,4 +1,4 @@
--- LCS-2016-001: Partially Conneted Vectors on Port Map
+-- LCS-2016-001: Partially Connected Vectors on Port Map
 -- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_001
 entity e001 is
 end entity ;
