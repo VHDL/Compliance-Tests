@@ -31,7 +31,7 @@ begin
     tb : process
     begin
         report to_string(GetConfig) ;
-        std.env.stop ;
+        wait ;
     end process ;
 
 end architecture ;
@@ -47,6 +47,7 @@ end entity;
 
 architecture tb of tb_access_system_environment_variables is
 begin
+  U_e006e : entity work.e006e ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

@@ -25,7 +25,7 @@ begin
 
     tb : process
     begin
-        std.env.stop ;
+        wait ;
     end process ;
 
 end architecture ;
@@ -41,6 +41,7 @@ end entity;
 
 architecture tb of tb_extended_ranges is
 begin
+  U_e099 : entity work.e099 ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

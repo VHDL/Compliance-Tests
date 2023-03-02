@@ -29,7 +29,7 @@ begin
         elapsed_time := epoch - start_time ;
         write(l, "Test duration     : " & to_string(elapsed_time) & " seconds") ;
         writeline(output, l) ;
-        std.env.stop ;
+        wait ;
     end process ;
 
 end architecture ;
@@ -45,6 +45,7 @@ end entity;
 
 architecture tb of tb_date_time_functions is
 begin
+  U_e011 : entity work.e011 ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

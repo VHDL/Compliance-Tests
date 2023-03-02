@@ -36,7 +36,7 @@ begin
         variable t : work.pack032.type_t ;
     begin
         t.increment ;
-        std.env.stop ;
+        wait ;
     end process ;
 
 end architecture ;
@@ -52,6 +52,7 @@ end entity;
 
 architecture tb of tb_path_name_and_shared_variables_and_subprograms is
 begin
+  U_e032 : entity work.e032 ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

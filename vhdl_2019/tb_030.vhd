@@ -19,7 +19,7 @@ begin
         for i in 1 to 1000000 loop
             l := bigstring ;
         end loop ;
-        std.env.stop ;
+        wait ;
     end process ;
 
 end architecture ;
@@ -35,6 +35,7 @@ end entity;
 
 architecture tb of tb_garbage_collection is
 begin
+  U_e030 : entity work.e030 ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

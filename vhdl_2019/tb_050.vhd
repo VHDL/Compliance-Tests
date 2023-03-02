@@ -32,7 +32,7 @@ begin
         SetVhdlReadSeverity(WARNING) ;
         report "Set VHDL Read Severity (WARNING)" ;
         report "Get VHDL Read Severity                              : " & to_string(GetVhdlReadSeverity) ;
-        std.env.stop ;
+        wait ;
     end process ;
 
 end architecture ;
@@ -48,6 +48,7 @@ end entity;
 
 architecture tb of tb_api_for_assert is
 begin
+  U_e050 : entity work.e050 ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

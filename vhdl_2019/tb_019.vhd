@@ -18,7 +18,7 @@ begin
         variable prod : sfixed := a * b ;
     begin
         report to_string(to_real(a)) & "*" & to_string(to_real(b)) & " = " & to_string(to_real(prod)) ;
-        std.env.stop ;
+        wait ;
     end process ;
 
 end architecture ;
@@ -34,6 +34,7 @@ end entity;
 
 architecture tb of tb_inferring_constraints_from_initial_values_for_signals_and_variables is
 begin
+  U_e019 : entity work.e019 ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

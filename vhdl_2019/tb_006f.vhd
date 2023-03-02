@@ -17,7 +17,7 @@ begin
         report TOOL_NAME ;
         report TOOL_EDITION ;
         report TOOL_VERSION ;
-        std.env.stop ;
+        wait ;
     end process ;
 
 end architecture ;
@@ -33,6 +33,7 @@ end entity;
 
 architecture tb of tb_standard_conditional_analysis_identifiers is
 begin
+  U_e006f : entity work.e006f ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

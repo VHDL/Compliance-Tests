@@ -21,7 +21,7 @@ begin
             report "  file_path : " & path(idx).file_path.all ;
             report "  file_line : " & to_string(path(idx).file_line) ;
         end loop ;
-        stop ;
+        wait ;
     end process ;
 
 end architecture ;

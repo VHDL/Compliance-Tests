@@ -22,7 +22,7 @@ begin
             file_open(status, f, fname, READ_WRITE_MODE) ;
             if status /= OPEN_OK then
                 report "Could not open " & fname ;
-                std.env.stop ;
+                wait ;
             end if ;
         `else
             -- Doesn't work in Riviera-PRO
@@ -43,7 +43,7 @@ begin
         report "  size      : " & to_string(file_size(f)) ;
         file_close(f) ;
         report "  state     : " & to_string(file_state(f)) ;
-        std.env.stop ;
+        wait ;
     end process ;
 
 end architecture ;
@@ -59,6 +59,7 @@ end entity;
 
 architecture tb of tb_fileio_textio_updates is
 begin
+  U_e006a : entity work.e006a ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

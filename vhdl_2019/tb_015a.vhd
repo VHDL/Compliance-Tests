@@ -14,7 +14,7 @@ begin
         report "FILE_NAME: " & FILE_NAME ;
         report "FILE_PATH: " & FILE_PATH ;
         report "FILE_LINE: " & FILE_LINE ;
-        stop ;
+        wait ;
     end process ;
 
 end architecture ;
@@ -30,6 +30,7 @@ end entity;
 
 architecture tb of tb_report_current_file_name_line_path is
 begin
+  U_e015a : entity work.e015a ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

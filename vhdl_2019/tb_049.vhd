@@ -63,7 +63,7 @@ begin
     begin
         bv_sel <= generic_mux4 generic map(bv_sel'subtype)(sel, bv_a, bv_b, bv_c, bv_d) ;
         int_sel <= generic_mux4 generic map(int_sel'subtype)(sel, int_a, int_b, int_c, int_d) ;
-        std.env.stop ;
+        wait ;
     end process ;
 
 end architecture ;
@@ -79,6 +79,7 @@ end entity;
 
 architecture tb of tb_map_generics_on_subprogram_call is
 begin
+  U_e049 : entity work.e049 ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

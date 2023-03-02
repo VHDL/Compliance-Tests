@@ -36,7 +36,7 @@ begin
   tb : process
   begin
     report to_string(int_vec) ;
-    std.env.stop ;
+    wait ;
   end process;
 
 end architecture ;
@@ -52,6 +52,7 @@ end entity;
 
 architecture tb of tb_sequential_declaration_regions is
 begin
+  U_e007 : entity work.e007 ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);
