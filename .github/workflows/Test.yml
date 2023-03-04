@@ -9,16 +9,34 @@ on:
 
 jobs:
 
+
   Compliance:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-    - uses: ghdl/setup-ghdl-ci@master
-      with:
-        backend: gcc
-    - uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-    - run: |
-        python -m pip install -r requirements.txt
-        python run.py -v -p10
+
+      - uses: actions/checkout@v3
+
+      - uses: ghdl/setup-ghdl-ci@master
+        with:
+          backend: gcc
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - run: |
+          python -m pip install -r requirements.txt
+          python run.py -k -v -p10
+
+
+  CoSim:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - uses: docker://ghdl/vunit:llvm
+        with:
+          args: cosim/dpi-ffi/ghdl-vffi/test/run.py

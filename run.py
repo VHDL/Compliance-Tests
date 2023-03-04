@@ -1,21 +1,25 @@
 #!/usr/bin/env python3
 
-import sys
 from pathlib import Path
-from vunit import VUnit, VUnitCLI
+from vunit import VUnit
 
 root = Path(__file__).resolve().parent
 
-simulator_name = VUnit.from_argv(compile_builtins=False).get_simulator_name()
-vhdl_standard = "2019" if simulator_name in ["rivierapro", "activehdl"] else "2008"
-print(f"Using VHDL-{vhdl_standard}")
+# Hint:
+#   VUnit supports adding custom CLI arguments.
+#   See http://vunit.github.io/py/ui.html#adding-custom-command-line-arguments.
 
-cli = VUnitCLI()
-args = cli.parse_args()
-args.keep_compiling = True
-ui = VUnit.from_args(
-    args=args, compile_builtins=False, vhdl_standard="2019" if simulator_name in ["rivierapro", "activehdl"] else "2008"
-)
+ui = VUnit.from_argv(compile_builtins=False, vhdl_standard="2008")
+
+if ui.get_simulator_name() in [
+    "activehdl",
+    "nvc",
+    "rivierapro",
+]:
+    ui = VUnit.from_argv(compile_builtins=False, vhdl_standard="2019")
+
+print(f"Using VHDL-{ui.vhdl_standard}")
+
 ui.add_vhdl_builtins()
 
 for std in ["2008", "2019"]:
@@ -31,4 +35,4 @@ ui.set_compile_option("activehdl.vcom_flags", ["-dbg"])
 try:
     ui.main()
 except SystemExit:
-    sys.exit(0)
+    pass
