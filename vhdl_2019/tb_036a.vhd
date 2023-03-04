@@ -11,9 +11,11 @@ package pack036a is
 end package ;
 
 --
+package pack036a_true is new work.pack036a generic map ( USE_LONG_DELAY => true ) ;
 
 library vunit_lib;
 context vunit_lib.vunit_context;
+
 
 entity tb_conditional_expressions_in_a_declaration is
   generic ( runner_cfg : string );

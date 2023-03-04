@@ -7,7 +7,7 @@ package pack049 is
       ) parameter (
         sel : natural range 0 to 3;
         a   : paramtype ;
-        b, c, d : a'subtype ;
+        b, c, d : a'subtype
       ) return a'subtype ;
 end package ;
 
@@ -19,7 +19,7 @@ package body pack049 is
       ) parameter (
         sel : natural range 0 to 3;
         a   : paramtype ;
-        b, c, d : a'subtype ;
+        b, c, d : a'subtype
       ) return a'subtype is
       variable rv : a'subtype ;
     begin

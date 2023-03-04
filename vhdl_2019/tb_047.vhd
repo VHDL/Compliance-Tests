@@ -34,7 +34,7 @@ begin
 
     stuff : process
     begin
-        report "x: " & to_integer(x.status) ;
+        assert to_string(x.status) /= "" severity failure ;
         wait ;
     end process ;
 
@@ -52,7 +52,7 @@ begin
 
     stuff : process
     begin
-        report "y: " & to_integer(y.status) ;
+        assert to_string(y.status) /= "" severity failure ;
         wait ;
     end process ;
 
@@ -83,6 +83,7 @@ end entity;
 
 architecture tb of tb_protected_type_shared_variables_on_entity_interface is
 begin
+  U_test047 : entity work.test047 ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

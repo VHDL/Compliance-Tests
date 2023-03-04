@@ -24,6 +24,8 @@ end package;
 library vunit_lib;
 context vunit_lib.vunit_context;
 
+use work.pack034.all ;
+
 entity tb_protected_types_with_generic_clause is
   generic ( runner_cfg : string );
 end entity;

@@ -13,6 +13,8 @@ end package;
 library vunit_lib;
 context vunit_lib.vunit_context;
 
+use work.pack082.all ;
+
 entity tb_empty_record is
   generic ( runner_cfg : string );
 end entity;

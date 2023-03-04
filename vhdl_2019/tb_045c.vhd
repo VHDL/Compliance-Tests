@@ -25,6 +25,8 @@ end package ;
 library vunit_lib;
 context vunit_lib.vunit_context;
 
+use work.pack045c.all ;
+
 entity tb_interface_converse is
   generic ( runner_cfg : string );
 end entity;

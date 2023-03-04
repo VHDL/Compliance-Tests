@@ -35,7 +35,7 @@ begin
 
   tb : process
   begin
-    report to_string(int_vec) ;
+    assert to_string(int_vec) /= "" severity failure ;
     wait ;
   end process;
 

@@ -33,7 +33,25 @@ entity tb_anonymous_types is
 end entity;
 
 architecture tb of tb_anonymous_types is
+
+  signal e1_a : bit ;
+  signal e1_b : natural range 10 to 20 ;
+
 begin
+  U_e1_016 : entity work.e1_016
+    port map (
+      A => e1_a,
+      B => e1_b
+    ) ;
+
+  U_e2_016 : entity work.e2_016
+    generic map (
+      Anonymous1 => e1_a'subtype,
+      Anonymous2 => e1_b'subtype
+    ) port map (
+        A => e1_a,
+        B => e1_b
+    ) ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

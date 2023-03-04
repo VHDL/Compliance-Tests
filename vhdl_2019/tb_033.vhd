@@ -18,6 +18,8 @@ end package ;
 library vunit_lib;
 context vunit_lib.vunit_context;
 
+use work.pack033.all ;
+
 entity tb_composition_with_protected_types is
   generic ( runner_cfg : string );
 end entity;

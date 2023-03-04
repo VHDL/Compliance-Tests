@@ -17,32 +17,44 @@ begin
         variable status : file_open_status ;
         file f : text ;
     begin
-        `if MODE="CHECK_STATUS" then
-            -- Works in Riviera-PRO
-            file_open(status, f, fname, READ_WRITE_MODE) ;
-            if status /= OPEN_OK then
-                report "Could not open " & fname ;
-                wait ;
-            end if ;
-        `else
-            -- Doesn't work in Riviera-PRO
-            file_open(f, fname, READ_WRITE_MODE);
-        `end
-        report "  state     : " & to_string(file_state(f)) ;
-        report "  mode      : " & to_string(file_mode(f)) ;
-        report "  size      : " & to_string(file_size(f)) ;
-        report "  canseek   : " & to_string(file_canseek(f)) ;
-        report "  position  : " & to_string(file_position(f)) ;
-        if file_canseek(f) = true then
-            file_seek(f, file_size(f)) ;
-            report "  position  : " & to_string(file_position(f)) ;
-            file_rewind(f) ;
-            report "  position  : " & to_string(file_position(f)) ;
-        end if ;
+        file_open(status, f, fname, READ_WRITE_MODE) ;
+        assert status = OPEN_OK
+            report "Couldn't open file: " & fname
+            severity failure ;
+
+        assert file_state(f) = STATE_OPEN
+            severity failure ;
+
+        assert file_mode(f) =  READ_WRITE_MODE
+            severity failure ;
+
+        assert file_size(f) =  22
+            severity failure ;
+
+        assert file_canseek(f) = true
+            severity failure ;
+
+        assert file_position(f) = 0
+            severity failure ;
+
+        file_seek(f, file_size(f)) ;
+
+        assert file_position(f) = 22
+            severity failure ;
+
+        file_rewind(f) ;
+        assert file_position(f) = 0
+            severity failure ;
+
         file_truncate(f, file_size(f)*2) ;
-        report "  size      : " & to_string(file_size(f)) ;
+
+        assert file_size(f) = 44
+            severity failure ;
+
         file_close(f) ;
-        report "  state     : " & to_string(file_state(f)) ;
+
+        assert file_state(f) = STATE_CLOSED
+            severity failure ;
         wait ;
     end process ;
 

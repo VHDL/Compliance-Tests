@@ -17,8 +17,8 @@ package body pack032 is
             constant vpath : string := value'path_name ;
             constant vinst : string := value'instance_name ;
         begin
-            report "vpath: " & vpath ;
-            report "vinst: " & vinst ;
+            assert vpath /= "" severity failure ;
+            assert vinst /= "" severity failure ;
             value := value + 1 ;
         end procedure ;
     end protected body ;

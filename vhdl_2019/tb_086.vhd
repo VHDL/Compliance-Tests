@@ -18,6 +18,19 @@ end entity;
 
 architecture tb of tb_all_interface_lists_can_be_ordered is
 begin
+  U_e086 : entity work.e086
+    generic map (
+        G1 => 1,
+        G2 => 2,
+        G3 => 3,
+        G4 => 5,
+        G5 => 6,
+        G6 => 7
+    ) port map (
+        P1 => "ab",
+        P2 => "cd",
+        P3 => "ef"
+    ) ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

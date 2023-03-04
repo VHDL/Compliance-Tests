@@ -16,6 +16,8 @@ end package ;
 library vunit_lib;
 context vunit_lib.vunit_context;
 
+use work.pack061.all ;
+
 entity tb_conditional_compilation is
   generic ( runner_cfg : string );
 end entity;

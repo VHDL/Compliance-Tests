@@ -11,9 +11,9 @@ begin
 
     tb : process
     begin
-        report "FILE_NAME: " & FILE_NAME ;
-        report "FILE_PATH: " & FILE_PATH ;
-        report "FILE_LINE: " & FILE_LINE ;
+        assert FILE_NAME /= "" severity failure ;
+        assert FILE_PATH /= "" severity failure ;
+        assert FILE_LINE /= "" severity failure ;
         wait ;
     end process ;
 
@@ -34,7 +34,7 @@ begin
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);
-    info("LCS-2016-016a: Standard functions to report current file name/line/path");
+    info("LCS-2016-015a: Standard functions to report current file name/line/path");
     test_runner_cleanup(runner);
     wait;
   end process test_runner;

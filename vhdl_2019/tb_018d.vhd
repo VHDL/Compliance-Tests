@@ -12,6 +12,8 @@ end package ;
 library vunit_lib;
 context vunit_lib.vunit_context;
 
+use work.pack018d.all ;
+
 entity tb_new_attribute_designated_type is
   generic ( runner_cfg : string );
 end entity;

@@ -12,12 +12,15 @@ architecture arch of e012 is
         d : integer_vector(0 to 4) ;
     end record ;
 
+    signal rec : rec_t ;
+
 begin
 
     tb : process
     begin
-        report rec'image ;
-        report to_string(rec) ;
+        assert rec'image      /= "" severity failure ;
+        assert to_string(rec) /= "" severity failure ;
+        wait ;
     end process ;
 
 end architecture ;
@@ -33,6 +36,7 @@ end entity;
 
 architecture tb of tb_image_and_to_string_for_composite_types is
 begin
+  U_e012 : entity work.e012 ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

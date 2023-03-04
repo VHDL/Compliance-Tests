@@ -12,26 +12,21 @@ begin
     tb : process
         variable valid : boolean ;
     begin
-        report "VHDL Is Assert Failed                               : " & to_string(IsVhdlAssertFailed) ;
-        report "VHDL Is Assert Failed (WARNING)                     : " & to_string(IsVhdlAssertFailed(WARNING)) ;
-        report "Assert Count                                        : " & to_string(GetVhdlAssertCount) ;
-        report "Assert Count (WARNING)                              : " & to_string(GetVhdlAssertCount(WARNING)) ;
-        report "Clearing Assert Count" ;
+        assert IsVhdlAssertFailed = false severity failure ;
+        assert IsVhdlAssertFailed(WARNING) = false severity failure ;
+        assert GetVhdlAssertCount = 0 severity failure ;
+        assert GetVhdlAssertCount(WARNING) = 0 severity failure ;
         ClearVhdlAssert ;
-        report "Set VHDL Assert Enable(FALSE)" ;
         SetVhdlAssertEnable(FALSE) ;
-        report "Set VHDL Assert Enable(FAILURE, FALSE)" ;
         SetVhdlAssertEnable(FAILURE, FALSE) ;
-        report "Get VHDL Assert Enable (FAILURE)                    : " & to_string(GetVhdlAssertEnable(FAILURE)) ;
-        report "Set VHDL Assert Format (FAILURE) 'Wacky Failure'    : " ;
+        assert GetVhdlAssertEnable(FAILURE) = false severity failure ;
         SetVhdlAssertFormat(FAILURE, "Wacky Failure") ;
-        report "Get VHDL Assert Format (FAILURE)                    : " & to_string(GetVhdlAssertFormat(FAILURE)) ;
+        assert GetVhdlAssertFormat(FAILURE) /= "" severity failure ;
         SetVhdlAssertFormat(WARNING, "Wackier Warning", valid) ;
-        report "Set VHDL Assert Format (WARNING) 'Wackier Warning'  : " & to_string(valid) ;
-        report "Get VHDL Assert Format (WARNING)                    : " & GetVhdlAssertFormat(WARNING) ;
+        assert valid = false severity failure ;
+        assert GetVhdlAssertFormat(WARNING) /= "" severity failure ;
         SetVhdlReadSeverity(WARNING) ;
-        report "Set VHDL Read Severity (WARNING)" ;
-        report "Get VHDL Read Severity                              : " & to_string(GetVhdlReadSeverity) ;
+        assert GetVhdlReadSeverity = failure severity failure ;
         wait ;
     end process ;
 

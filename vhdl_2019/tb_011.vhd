@@ -19,16 +19,16 @@ begin
         variable elapsed_time : real ;
     begin
         start_time := epoch ;
-        write(l, "Local Time        : " & to_string(LOCALTIME)&LF) ;
-        write(l, "Local Time+       : " & to_string(LOCALTIME,5)&LF) ;
-        write(l, "Local Epoch Time  : " & to_string(LOCALTIME(start_time))&LF) ;
-        write(l, "Local GM Time     : " & to_string(LOCALTIME(GMTIME))&LF) ;
-        write(l, "GM Time           : " & to_string(GMTIME)&LF) ;
-        write(l, "GM Epoch Time     : " & to_string(GMTIME(start_time))&LF) ;
-        write(l, "GM Local TIme     : " & to_string(GMTIME(LOCALTIME))&LF) ;
+        assert to_string(LOCALTIME)             /= "" severity failure ;
+        assert to_string(LOCALTIME)             /= "" severity failure ;
+        assert to_string(LOCALTIME,5)           /= "" severity failure ;
+        assert to_string(LOCALTIME(start_time)) /= "" severity failure ;
+        assert to_string(LOCALTIME(GMTIME))     /= "" severity failure ;
+        assert to_string(GMTIME)                /= "" severity failure ;
+        assert to_string(GMTIME(start_time))    /= "" severity failure ;
+        assert to_string(GMTIME(LOCALTIME))     /= "" severity failure ;
         elapsed_time := epoch - start_time ;
-        write(l, "Test duration     : " & to_string(elapsed_time) & " seconds") ;
-        writeline(output, l) ;
+        assert to_string(elapsed_time)          /= "" severity failure ;
         wait ;
     end process ;
 

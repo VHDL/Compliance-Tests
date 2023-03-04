@@ -38,6 +38,8 @@ end package body ;
 library vunit_lib;
 context vunit_lib.vunit_context;
 
+use work.pack002.all ;
+
 entity tb_allow_access_and_protected_type_params_on_func_interfaces is
   generic ( runner_cfg : string );
 end entity;

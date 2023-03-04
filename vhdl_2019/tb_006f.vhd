@@ -11,12 +11,12 @@ begin
 
     tb : process
     begin
-        report VHDL_VERSION ;
-        report TOOL_TYPE ;
-        report TOOL_VENDOR ;
-        report TOOL_NAME ;
-        report TOOL_EDITION ;
-        report TOOL_VERSION ;
+        assert VHDL_VERSION /= "" severity failure ;
+        assert TOOL_TYPE    /= "" severity failure ;
+        assert TOOL_VENDOR  /= "" severity failure ;
+        assert TOOL_NAME    /= "" severity failure ;
+        assert TOOL_EDITION /= "" severity failure ;
+        assert TOOL_VERSION /= "" severity failure ;
         wait ;
     end process ;
 

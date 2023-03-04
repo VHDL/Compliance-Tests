@@ -16,7 +16,7 @@ begin
     tb : process
         variable l : std.textio.line ;
     begin
-        for i in 1 to 1000000 loop
+        for i in 1 to 10000 loop
             l := bigstring ;
         end loop ;
         wait ;

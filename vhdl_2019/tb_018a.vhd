@@ -15,6 +15,8 @@ end package ;
 library vunit_lib;
 context vunit_lib.vunit_context;
 
+use work.pack018a.all ;
+
 entity tb_new_attribute_index is
   generic ( runner_cfg : string );
 end entity;

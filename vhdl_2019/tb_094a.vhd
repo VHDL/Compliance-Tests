@@ -20,6 +20,8 @@ end package body ;
 library vunit_lib;
 context vunit_lib.vunit_context;
 
+use work.pack094a.all ;
+
 entity tb_conditional_return_statement is
   generic ( runner_cfg : string );
 end entity;

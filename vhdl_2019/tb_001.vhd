@@ -32,6 +32,7 @@ end entity;
 
 architecture tb of tb_partially_connected_vectors_on_port_map is
 begin
+  U_e001 : entity work.e001 ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

@@ -26,6 +26,8 @@ end package body ;
 library vunit_lib;
 context vunit_lib.vunit_context;
 
+use work.pack004.all ;
+
 entity tb_allow_protected_type_method_params_to_be_access_protected_file is
   generic ( runner_cfg : string );
 end entity;

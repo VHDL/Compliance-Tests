@@ -17,7 +17,14 @@ entity tb_extra_optional_semicolon_on_interface_list is
 end entity;
 
 architecture tb of tb_extra_optional_semicolon_on_interface_list is
+  signal a : bit ;
+  signal b : integer ;
 begin
+  U_e071a : entity work.e071a
+    port map (
+      a => a,
+      b => b
+    ) ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

@@ -15,11 +15,11 @@ begin
         path := get_call_path ;
         for idx in path'range loop
             -- NOTE: Riviera-PRO needs -dbg flag during vcom for this string to be populated correctly
-            report "call path   : " & to_string(path(idx)) ;
-            report "  name      : " & path(idx).name.all ;
-            report "  file_name : " & path(idx).file_name.all ;
-            report "  file_path : " & path(idx).file_path.all ;
-            report "  file_line : " & to_string(path(idx).file_line) ;
+            assert to_string(path(idx))             /= "" severity failure ;
+            assert path(idx).name.all               /= "" severity failure ;
+            assert path(idx).file_name.all          /= "" severity failure ;
+            assert path(idx).file_path.all          /= "" severity failure ;
+            assert to_string(path(idx).file_line)   /= "" severity failure ;
         end loop ;
         wait ;
     end process ;
@@ -37,6 +37,7 @@ end entity;
 
 architecture tb of tb_report_calling_path is
 begin
+  U_e015 : entity work.e015 ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

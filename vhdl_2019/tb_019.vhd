@@ -17,7 +17,7 @@ begin
     process
         variable prod : sfixed := a * b ;
     begin
-        report to_string(to_real(a)) & "*" & to_string(to_real(b)) & " = " & to_string(to_real(prod)) ;
+        assert to_string(prod) /= "" severity failure ;
         wait ;
     end process ;
 

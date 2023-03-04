@@ -121,6 +121,13 @@ end entity;
 
 architecture tb of tb_array_type_generics is
 begin
+  U_e059a0 : entity work.e_059(a0) ;
+  U_e059a1 : entity work.e_059(a1) ;
+  U_e059a2 : entity work.e_059(a2) ;
+  U_e059a3 : entity work.e_059(a3) ;
+  U_e059a4 : entity work.e_059(a4) ;
+  U_e059a5 : entity work.e_059(a5) ;
+  U_e059a6 : entity work.e_059(a6) ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);

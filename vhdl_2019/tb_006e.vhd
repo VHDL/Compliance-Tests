@@ -14,7 +14,7 @@ architecture arch of e006e is
         variable result : boolean;
     begin
         home := GETENV("HOME");
-        assert home /= null report "No HOME environment variable";
+        assert home /= null report "No HOME environment variable" severity failure;
         FILE_OPEN(config,
             home.all & DIR_SEPARATOR &
             ".config" & DIR_SEPARATOR &
@@ -30,7 +30,7 @@ begin
 
     tb : process
     begin
-        report to_string(GetConfig) ;
+        assert to_string(GetConfig) /= "" severity failure ;
         wait ;
     end process ;
 

@@ -26,6 +26,7 @@ package body pack041 is
                 elsif field_idx = length - 1 then
                     return prefix & element_str;
                 end if;
+                return element_str ;
             end block;
         end function;
 
@@ -60,6 +61,7 @@ package body pack041 is
                 elsif element_idx = record_type.length - 1 then
                     return prefix & element_str;
                 end if;
+                return element_str ;
             end block;
         end function;
 
@@ -135,6 +137,8 @@ end package body ;
 
 library vunit_lib;
 context vunit_lib.vunit_context;
+
+use work.pack041.all ;
 
 entity tb_record_introspection_type_reflection is
   generic ( runner_cfg : string );

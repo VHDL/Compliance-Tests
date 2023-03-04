@@ -23,6 +23,8 @@ end package ;
 library vunit_lib;
 context vunit_lib.vunit_context;
 
+use work.pack045a.all ;
+
 entity tb_interface_mode_view is
   generic ( runner_cfg : string );
 end entity;

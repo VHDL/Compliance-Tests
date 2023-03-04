@@ -56,6 +56,7 @@ end entity;
 
 architecture tb of tb_closely_related_record_types is
 begin
+  U_test075 : entity work.test075 ;
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);
