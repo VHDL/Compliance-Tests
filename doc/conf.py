@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from os import environ
 from pathlib import Path
 from json import loads as json_loads
 from yaml import load as yaml_load, Loader as yaml_Loader
@@ -70,6 +71,34 @@ if ctx.is_file():
     html_context.update(json_loads(ctx.open("r").read()))
 
 html_theme = "furo"
+
+html_css_files = [
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/solid.min.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/brands.min.css",
+]
+
+html_theme_options = {
+    "source_repository": "https://github.com/VHDL/Compliance-Tests",
+    "source_branch": environ.get("GITHUB_REF_NAME", "main"),
+    "source_directory": "doc",
+    "footer_icons": [
+        {
+            "name": "GitLab IEEE-P1076",
+            "url": "https://gitlab.com/IEEE-P1076",
+            "html": "",
+            "class": "fa-solid fa-brands fa-gitlab",
+        },
+        {
+            "name": "GitHub VHDL/Compliance-Tests",
+            "url": "https://github.com/VHDL/Compliance-Tests",
+            "html": "",
+            "class": "fa-solid fa-brands fa-github",
+        },
+    ],
+}
+
+html_title = 'VHDL Compliance Tests'
 
 # -- Sphinx.Ext.InterSphinx --------------------------------------------------------------------------------------------
 
