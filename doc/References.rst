@@ -4,10 +4,14 @@ References
 * IEEE P1076 Working Group
 
   * :gl:`IEEE-P1076`
-    - `IEEE-P1076.gitlab.io <https://ieee-p1076.gitlab.io/>`__
-    - :gl:`IEEE-P1076/VHDL-Issues`
-    - :gl:`IEEE-P1076/packages`
-  - `[eda-twiki] P1076 Web > VHDL2017 <http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/VHDL2017>`__
+
+    * `IEEE-P1076.gitlab.io <https://ieee-p1076.gitlab.io/>`__
+
+    * :gl:`IEEE-P1076/VHDL-Issues`
+
+    * :gl:`IEEE-P1076/packages`
+
+  * `[eda-twiki] P1076 Web > VHDL2017 <http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/VHDL2017>`__
 
 * Tests/sources:
 
