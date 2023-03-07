@@ -8,3 +8,5 @@
 </p>
 
 **Compliance-Tests** is a collection of test suites to evaluate the support of [VHDL 2008](https://standards.ieee.org/standard/1076-2008.html) and [VHDL 2019](https://standards.ieee.org/standard/1076-2019.html) features.
+
+Find guidelines to run the tests locally at [Usage](https://vhdl.github.io/Compliance-Tests/Usage.html).
