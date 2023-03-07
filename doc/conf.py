@@ -41,6 +41,7 @@ with open(ROOT / "2019.inc", "w", encoding="utf-8") as index_fptr:
 extensions = [
     "sphinx.ext.extlinks",
     "sphinx.ext.intersphinx",
+    "myst_parser",
 ]
 
 source_suffix = {
