@@ -1,0 +1,4 @@
+furo
+pyyaml
+sphinx
+tabulate
