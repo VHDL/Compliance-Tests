@@ -4,6 +4,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
+use std.env.all;
+
 entity e011 is
 end entity ;
 
@@ -32,19 +34,15 @@ begin
     req <= '1';
     wait until rising_edge(clk);
     req <= '0';
+    grant <= '1';
+    wait until rising_edge(clk);
+    req <= '1';
+    grant <= '0';
+    wait until rising_edge(clk);
+    req <= '0';
     wait until rising_edge(clk);
     wait;
   end process;
-
-  arbiter: process is
-  begin
-    wait until rising_edge(clk);
-    if (rst) then
-      grant <= '0';
-    else
-      grant <= req;
-    end if;
-  end process arbiter;
 
   property req_grant_p is always (req -> next(not grant));
   sequence req_grant_s is {req; grant};
@@ -53,6 +51,31 @@ begin
   cover_d : cover req_grant_s report "Covered";
   assume_d : assume req_grant_p;
   restrict_d : restrict {rst[*3]; not rst}[+];
+
+--  pslapi : process is
+--  begin
+--    -- Test return values after elaboration
+--    assert not PslAssertFailed severity failure;
+--    assert not PslIsCovered severity failure;
+--    assert not PslIsAssertCovered severity failure;
+--    -- Enable coverage of asserts
+--    SetPslCoverAssert;
+--    assert GetPslCoverAssert severity failure;
+--    -- Occurance of req -> next grant
+--    wait until rising_edge(clk) and grant = '1';
+--    assert not PslAssertFailed severity failure;
+--    assert PslIsCovered severity failure;
+--    assert PslIsAssertCovered severity failure;
+--    -- Occurance of req -> next not grant
+--    wait until rising_edge(clk) and req = '1';
+--    wait until rising_edge(clk);
+--    assert PslAssertFailed severity failure;
+--    -- Clear internal PSL state information
+--    ClearPslState;
+--    assert not PslAssertFailed severity failure;
+--    assert not PslIsCovered severity failure;
+--    assert not PslIsAssertCovered severity failure;
+--  end process;
 
 end architecture arch;
 
@@ -71,7 +94,7 @@ begin
   test_runner: process is
   begin
     test_runner_setup(runner, runner_cfg);
-    error("LCS-2016-043: API and Attributes for PSL");
+    info("LCS-2016-043: API and Attributes for PSL");
     test_runner_cleanup(runner);
     wait;
   end process test_runner;
