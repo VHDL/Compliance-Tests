@@ -1,5 +1,6 @@
 -- LCS-2016-043: API and Attributes for PSL
--- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_043
+-- https://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_043
+-- 1076-2019 sections: 16.2.7 (PSL attributes) and 16.5.8 (PSL API)
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -44,38 +45,64 @@ begin
     wait;
   end process;
 
-  property req_grant_p is always (req -> next(not grant));
-  sequence req_grant_s is {req; grant};
+  -- PSL definitions & directives
+  property req_grant_prop is always (req -> next(grant));
+  sequence req_grant_seq is {req; grant};
+  req_grant_assert : assert req_grant_prop;
+  req_grant_cover : cover req_grant_seq report "Covered";
+  req_grant_assume : assume req_grant_prop;
+  rst_restrict : restrict {rst[*3]; not rst}[+];
 
-  assert_d : assert req_grant_p;
-  cover_d : cover req_grant_s report "Covered";
-  assume_d : assume req_grant_p;
-  restrict_d : restrict {rst[*3]; not rst}[+];
+  -- PSL attributes tests (1076-2019 16.2.7)
+  pslattributes : process is
+  begin
+    wait until rising_edge(clk) and rst = '0';
+    wait until rising_edge(clk);
+    assert not rst_restrict'signal severity failure;
+    -- Occurance of req -> next grant
+    wait until req_grant_prop'event;
+    -- Test p'event atributes
+    assert req_grant_seq'event severity failure;
+    assert req_grant_assert'event severity failure;
+    assert req_grant_cover'event severity failure;
+    -- Test p'signal attributes
+    assert req_grant_assert'signal severity failure;
+    assert req_grant_cover'signal severity failure;
+    assert req_grant_assume'signal severity failure;
+    -- Occurance of req -> next not grant
+    wait until rising_edge(clk) and req = '1';
+    wait until rising_edge(clk);
+    assert not req_grant_assert'signal severity failure;
+    assert not req_grant_assume'signal severity failure;
+    wait;
+  end process;
 
---  pslapi : process is
---  begin
---    -- Test return values after elaboration
---    assert not PslAssertFailed severity failure;
---    assert not PslIsCovered severity failure;
---    assert not PslIsAssertCovered severity failure;
---    -- Enable coverage of asserts
---    SetPslCoverAssert;
---    assert GetPslCoverAssert severity failure;
---    -- Occurance of req -> next grant
---    wait until rising_edge(clk) and grant = '1';
---    assert not PslAssertFailed severity failure;
---    assert PslIsCovered severity failure;
---    assert PslIsAssertCovered severity failure;
---    -- Occurance of req -> next not grant
---    wait until rising_edge(clk) and req = '1';
---    wait until rising_edge(clk);
---    assert PslAssertFailed severity failure;
---    -- Clear internal PSL state information
---    ClearPslState;
---    assert not PslAssertFailed severity failure;
---    assert not PslIsCovered severity failure;
---    assert not PslIsAssertCovered severity failure;
---  end process;
+  -- PSL API tests (1076-2019 16.5.8)
+  pslapi : process is
+  begin
+    -- Test return values after elaboration
+    assert not PslAssertFailed severity failure;
+    assert not PslIsCovered severity failure;
+    assert not PslIsAssertCovered severity failure;
+    -- Enable coverage of asserts
+    SetPslCoverAssert;
+    assert GetPslCoverAssert severity failure;
+    -- Occurance of req -> next grant
+    wait until rising_edge(clk) and grant = '1';
+    assert not PslAssertFailed severity failure;
+    assert PslIsCovered severity failure;
+    assert PslIsAssertCovered severity failure;
+    -- Occurance of req -> next not grant
+    wait until rising_edge(clk) and req = '1';
+    wait until rising_edge(clk);
+    assert PslAssertFailed severity failure;
+    -- Clear internal PSL state information
+    ClearPslState;
+    assert not PslAssertFailed severity failure;
+    assert not PslIsCovered severity failure;
+    assert not PslIsAssertCovered severity failure;
+    wait;
+  end process;
 
 end architecture arch;
 
