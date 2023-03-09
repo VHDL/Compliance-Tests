@@ -12,22 +12,29 @@ jobs:
 
   Compliance:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        tool:
+          - ghdl
+          - ghdl/llvm
+          - nvc
 
     steps:
 
       - uses: actions/checkout@v3
 
-      - uses: ghdl/setup-ghdl-ci@master
-        with:
-          backend: gcc
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
-
-      - run: python -m pip install -r requirements.txt
-
-      - run: python run.py -k -v
+      # Cannot use 'docker://' syntax here because using variables (e.g matrix.tool) is not supported.
+      # See https://github.com/orgs/community/discussions/9049.
+      # Therefore, we need to call docker explicitly.
+      - run: >-
+          docker run --rm -t
+          -v $(pwd):/wrk -w /wrk
+          -v $GITHUB_STEP_SUMMARY:/wrk/GHSS
+          -e GITHUB_STEP_SUMMARY=/wrk/GHSS
+          -e GITHUB_ACTIONS
+          gcr.io/hdl-containers/${{ matrix.tool }}
+          ./.github/run.sh
 
 
   CoSim:
