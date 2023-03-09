@@ -1,1 +1,1 @@
-vunit-hdl @ git+https://github.com/VUnit/vunit.git@v5.0.0
+https://github.com/VUnit/vunit/archive/v5.0.0.zip#vunit-hdl
