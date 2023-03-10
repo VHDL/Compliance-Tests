@@ -1,6 +1,5 @@
 -- LCS-2016-047: Protected Type: Shared Variables on Entity Interface
 -- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_047
--- REVIEW
 package pack047 is
 
     type prot_t is protected
@@ -24,7 +23,7 @@ end package body ;
 
 entity e047a is
   port (
-    x : inout work.pack047.prot_t
+    variable x : inout work.pack047.prot_t
   ) ;
 end entity ;
 
@@ -42,7 +41,7 @@ end architecture ;
 
 entity e047b is
   port (
-    y : inout work.pack047.prot_t
+    variable y : inout work.pack047.prot_t
   ) ;
 end entity ;
 

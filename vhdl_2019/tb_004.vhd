@@ -5,7 +5,7 @@ use std.textio.all ;
 package pack004 is
 
     type test_t is protected
-        impure function something(variable x : inout text) return integer ;
+        impure function something(file x : text) return integer ;
     end protected ;
 
 end package ;
@@ -13,7 +13,7 @@ end package ;
 package body pack004 is
 
     type test_t is protected body
-        impure function something(variable x : inout text) return integer is
+        impure function something(file x : text) return integer is
         begin
             return 0;
         end function ;
