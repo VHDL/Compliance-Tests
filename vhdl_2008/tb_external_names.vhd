@@ -17,7 +17,7 @@ library vunit_lib ;
 context vunit_lib.vunit_context;
 
 entity tb_external_names is
-  generic ( runner_cfg : string ) ;
+  generic ( runner_cfg : string := runner_cfg_default) ;
 end entity;
 architecture arch of tb_external_names is
 

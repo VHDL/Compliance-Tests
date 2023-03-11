@@ -47,7 +47,7 @@ library vunit_lib;
 context vunit_lib.vunit_context;
 
 entity tb_path_name_and_shared_variables_and_subprograms is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_path_name_and_shared_variables_and_subprograms is

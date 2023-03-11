@@ -19,7 +19,7 @@ context vunit_lib.vunit_context;
 use work.pack061.all ;
 
 entity tb_conditional_compilation is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_conditional_compilation is

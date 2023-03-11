@@ -66,7 +66,7 @@ library vunit_lib;
 context vunit_lib.vunit_context;
 
 entity tb_fileio_textio_updates is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_fileio_textio_updates is

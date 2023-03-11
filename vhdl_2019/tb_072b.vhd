@@ -34,7 +34,7 @@ context vunit_lib.vunit_context;
 use work.pack072b.all ;
 
 entity tb_function_knows_return_vector_size is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_function_knows_return_vector_size is

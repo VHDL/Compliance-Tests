@@ -41,7 +41,7 @@ context vunit_lib.vunit_context;
 use work.pack002.all ;
 
 entity tb_allow_access_and_protected_type_params_on_func_interfaces is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_allow_access_and_protected_type_params_on_func_interfaces is

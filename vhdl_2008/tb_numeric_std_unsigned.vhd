@@ -7,7 +7,7 @@ use ieee.numeric_std.to_unsigned;
 use ieee.numeric_std_unsigned.all;
 
 entity tb_numeric_std_unsigned is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_numeric_std_unsigned is

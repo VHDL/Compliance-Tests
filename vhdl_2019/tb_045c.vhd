@@ -28,7 +28,7 @@ context vunit_lib.vunit_context;
 use work.pack045c.all ;
 
 entity tb_interface_converse is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_interface_converse is

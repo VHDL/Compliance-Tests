@@ -15,7 +15,7 @@ context vunit_lib.vunit_context;
 use work.pack018d.all ;
 
 entity tb_new_attribute_designated_type is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_new_attribute_designated_type is

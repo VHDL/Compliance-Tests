@@ -5,7 +5,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity tb_psl is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity tb_psl;
 
 architecture tb of tb_psl is
