@@ -26,7 +26,7 @@ context vunit_lib.vunit_context;
 use work.pack045a.all ;
 
 entity tb_interface_mode_view is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_interface_mode_view is

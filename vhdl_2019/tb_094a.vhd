@@ -23,7 +23,7 @@ context vunit_lib.vunit_context;
 use work.pack094a.all ;
 
 entity tb_conditional_return_statement is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_conditional_return_statement is

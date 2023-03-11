@@ -30,7 +30,7 @@ library vunit_lib;
 context vunit_lib.vunit_context;
 
 entity tb_garbage_collection is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_garbage_collection is

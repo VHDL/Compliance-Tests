@@ -4,7 +4,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity tb_matching_operators_ge is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity tb_matching_operators_ge;
 
 architecture tb of tb_matching_operators_ge is

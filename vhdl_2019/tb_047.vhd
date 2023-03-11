@@ -77,7 +77,7 @@ library vunit_lib;
 context vunit_lib.vunit_context;
 
 entity tb_protected_type_shared_variables_on_entity_interface is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_protected_type_shared_variables_on_entity_interface is

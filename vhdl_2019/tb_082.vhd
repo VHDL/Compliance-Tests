@@ -16,7 +16,7 @@ context vunit_lib.vunit_context;
 use work.pack082.all ;
 
 entity tb_empty_record is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_empty_record is

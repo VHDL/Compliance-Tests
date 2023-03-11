@@ -18,7 +18,7 @@ context vunit_lib.vunit_context;
 use work.pack026c.all ;
 
 entity tb_long_integers is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_long_integers is

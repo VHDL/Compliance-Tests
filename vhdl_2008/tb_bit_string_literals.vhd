@@ -7,7 +7,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity tb_bit_string_literals is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity tb_bit_string_literals;
 
 architecture tb of tb_bit_string_literals is

@@ -31,7 +31,7 @@ context vunit_lib.vunit_context;
 use work.pack018.all ;
 
 entity tb_enumerated_type_attributes is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_enumerated_type_attributes is

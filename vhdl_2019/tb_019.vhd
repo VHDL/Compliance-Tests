@@ -29,7 +29,7 @@ library vunit_lib;
 context vunit_lib.vunit_context;
 
 entity tb_inferring_constraints_from_initial_values_for_signals_and_variables is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_inferring_constraints_from_initial_values_for_signals_and_variables is

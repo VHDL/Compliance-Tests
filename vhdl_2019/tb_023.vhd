@@ -8,7 +8,7 @@ library vunit_lib;
 context vunit_lib.vunit_context;
 
 entity tb_relax_library_requirement_on_configurations is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_relax_library_requirement_on_configurations is

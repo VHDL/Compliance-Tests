@@ -27,7 +27,7 @@ context vunit_lib.vunit_context;
 use work.pack034.all ;
 
 entity tb_protected_types_with_generic_clause is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_protected_types_with_generic_clause is

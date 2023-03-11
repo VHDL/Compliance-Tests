@@ -29,7 +29,7 @@ context vunit_lib.vunit_context;
 use work.pack004.all ;
 
 entity tb_allow_protected_type_method_params_to_be_access_protected_file is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_allow_protected_type_method_params_to_be_access_protected_file is

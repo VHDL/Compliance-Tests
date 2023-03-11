@@ -2,7 +2,7 @@ library vunit_lib;
 context vunit_lib.vunit_context;
 
 entity tb_top_generic_subtype is
-  generic ( runner_cfg : runner_cfg_t );
+  generic ( runner_cfg : runner_cfg_t := runner_cfg_default);
 end entity tb_top_generic_subtype;
 
 architecture tb of tb_top_generic_subtype is

@@ -141,7 +141,7 @@ context vunit_lib.vunit_context;
 use work.pack041.all ;
 
 entity tb_record_introspection_type_reflection is
-  generic ( runner_cfg : string );
+  generic ( runner_cfg : string := runner_cfg_default);
 end entity;
 
 architecture tb of tb_record_introspection_type_reflection is
