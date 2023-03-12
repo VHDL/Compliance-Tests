@@ -64,6 +64,19 @@ exclude_patterns = [
 
 numfig = True
 
+# The name of the Pygments (syntax highlighting) style to use.
+pygments_style = "manni"
+
+# -- Restructured Text settings ----------------------------------------------------------------------------------------
+prologPath = "prolog.inc"
+try:
+    with open(prologPath, "r") as prologFile:
+        rst_prolog = prologFile.read()
+except Exception as ex:
+    print(f"[ERROR:] While reading '{prologPath}'.")
+    print(ex)
+    rst_prolog = ""
+
 # -- Options for HTML output -------------------------------------------------------------------------------------------
 
 html_context = {}
