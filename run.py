@@ -26,7 +26,7 @@ Failed tests:
         if test.status == 'failed':
             GHASummary(f'- {key!s}\n')
 
-#---
+# ---
 
 
 root = Path(__file__).resolve().parent
@@ -56,6 +56,10 @@ for std in ["2008", "2019"]:
 # unless the code is compiled with the debug option.
 ui.set_compile_option("rivierapro.vcom_flags", ["-dbg"])
 ui.set_compile_option("activehdl.vcom_flags", ["-dbg"])
+
+# Prevent PSL errors from failing the simulation but allow the VHDL assertion verifying the
+# PSL functionality to fail with severity failure
+ui.library("vhdl_2019").test_bench("tb_api_and_attributes_for_psl").set_sim_option("vhdl_assert_stop_level", "failure")
 
 # Mark a test run as successful even if failing tests are found.
 try:
