@@ -1,1 +1,1 @@
-https://github.com/VUnit/vunit/archive/v5.0.0.zip#vunit-hdl
+https://github.com/VUnit/vunit/archive/master.zip
