@@ -35,14 +35,14 @@ root = Path(__file__).resolve().parent
 #   VUnit supports adding custom CLI arguments.
 #   See http://vunit.github.io/py/ui.html#adding-custom-command-line-arguments.
 
-ui = VUnit.from_argv(compile_builtins=False, vhdl_standard="2008")
+ui = VUnit.from_argv(vhdl_standard="2008")
 
 if ui.get_simulator_name() in [
     "activehdl",
     "nvc",
     "rivierapro",
 ]:
-    ui = VUnit.from_argv(compile_builtins=False, vhdl_standard="2019")
+    ui = VUnit.from_argv(vhdl_standard="2019")
 
 print(f"Using VHDL-{ui.vhdl_standard}")
 
