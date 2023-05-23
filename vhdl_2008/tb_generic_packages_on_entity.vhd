@@ -69,7 +69,7 @@ end entity ;
 
 architecture tb of tb_generic_packages_on_entity is
 begin
-  U_test : entity test;
+  U_test : entity work.test;
   test_runner : process is
   begin
     test_runner_setup(runner, runner_cfg);
@@ -78,4 +78,3 @@ begin
     wait ;
   end process;
 end architecture;
-
