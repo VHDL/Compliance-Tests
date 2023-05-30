@@ -61,6 +61,11 @@ ui.set_compile_option("activehdl.vcom_flags", ["-dbg"])
 # PSL functionality to fail with severity failure
 ui.library("vhdl_2019").test_bench("tb_api_and_attributes_for_psl").set_sim_option("vhdl_assert_stop_level", "failure")
 
+# Input data for tb_access_system_environment_variables
+environ["VHDL_TEST"] = "hello world"
+environ["TOOL_NAME"] = "do not use this"
+environ.pop("NOT_HERE", None)
+
 # Mark a test run as successful even if failing tests are found.
 try:
     ui.main(post_run=post_func)
