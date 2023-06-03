@@ -1,11 +1,23 @@
 -- LCS-2016-071a: Extra optional semicolon at the end of interface_list
 -- http://www.eda-twiki.org/cgi-bin/view.cgi/P1076/LCS2016_071a
 entity e071a is
+  generic ( g : in natural ; ) ;
   port (
     a   :   in  bit ;
     b   :   out integer ;
   ) ;
 end entity ;
+
+architecture test of e071a is
+  component comp is
+    port ( x : in bit ; ) ;
+  end component;
+
+  procedure proc ( p : in integer ; ) is
+  begin
+  end procedure ;
+begin
+end architecture;
 
 --
 
