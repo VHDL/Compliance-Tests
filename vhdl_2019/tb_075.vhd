@@ -9,12 +9,14 @@ architecture arch of test075 is
         x   :   bit_vector(7 downto 0) ;
         y   :   bit_vector(10 downto 0) ;
         z   :   bit_vector(0 to 10) ;
+        r   :   integer ;
     end record ;
 
     type b_t is record
         x   :   bit_vector(7 downto 0) ;
         y   :   bit_vector(10 downto 0) ;
         z   :   bit_vector(0 to 10) ;
+        r   :   real ;
     end record ;
 
     type c_t is record
@@ -33,15 +35,22 @@ architecture arch of test075 is
     signal ab : a_t ;
     signal ac : a_t ;
     signal ad : a_t ;
-    signal b : b_t ;
+    signal b : b_t := (X"42", (others => '0'), (others => '1'), 4.0);
     signal c : c_t ;
     signal d : d_t ;
 
 begin
 
     ab <= a_t(b) ; -- valid
-    ac <= a_t(c) ; -- invalid - lengths
+    --ac <= a_t(c) ; -- invalid - lengths
     --ad <= a_t(d) ; -- invalid - elements
+
+    check: process is
+    begin
+        wait for 0 ns;
+        assert ab = (X"42", (others => '0'), (others => '1'), 4);
+        wait;
+    end process;
 
 end architecture ;
 
