@@ -13,27 +13,35 @@ package body pack041 is
     -- can create a string for any value
     impure function to_string(variable value : VALUE_MIRROR) return STRING is
         -- string-ify array elements
-        impure function to_string(variable value : ARRAY_VALUE_MIRROR; field_idx, length : INDEX; prefix : STRING) return STRING is
-            variable index : index_vector(1 to length);
+        impure function to_string(variable value : ARRAY_VALUE_MIRROR;
+                                  element_idx, array_length : INDEX;
+                                  prefix : STRING ) return STRING is
         begin
-            index := (1 => field_idx);
+            assert element_idx < array_length
+                report "Illegal state : index out of bounds" severity FAILURE;
             block
-                variable element : value_mirror := value.get(index) ;
-                constant element_str : STRING := to_string(element);
-             begin
-                if field_idx < length - 1 then
-                    return to_string(value, field_idx + 1, length, prefix & element_str & ", ");
-                elsif field_idx = length - 1 then
+                variable sub : ARRAY_SUBTYPE_MIRROR := value.get_subtype_mirror;
+                variable left : INDEX := sub.left;
+                variable adj : INDEX :=
+                    left + element_idx when sub.ascending else left - element_idx;
+                variable elt : VALUE_MIRROR := value.get(adj);
+                constant element_str : STRING := to_string(elt);
+            begin
+                if element_idx < array_length - 1 then
+                    return to_string(value, element_idx + 1, array_length,
+                                     prefix & element_str & ", ");
+                elsif element_idx = array_length - 1 then
                     return prefix & element_str;
+                else
+                    -- return if continue from out-of-bounds FAILURE
+                    return prefix;
                 end if;
-                return element_str ;
             end block;
         end function;
 
         -- string-ify arrays
         impure function to_string(variable value : ARRAY_VALUE_MIRROR) return STRING is
             variable array_type : ARRAY_SUBTYPE_MIRROR;
-            variable sm : SUBTYPE_MIRROR ;
             variable length : INDEX;
         begin
             array_type := value.get_subtype_mirror;
@@ -139,17 +147,52 @@ library vunit_lib;
 context vunit_lib.vunit_context;
 
 use work.pack041.all ;
+use std.reflection.all ;
 
 entity tb_record_introspection_type_reflection is
   generic ( runner_cfg : string );
 end entity;
 
 architecture tb of tb_record_introspection_type_reflection is
+  type rec is record
+    x, y : natural;
+  end record;
+
+  function to_upper (s : string) return string is
+    variable r : string(s'range);
+    variable p : integer;
+  begin
+    for i in s'range loop
+      p := character'pos(s(i));
+      if p >= 97 and p <= 122 then
+        r(i) := character'val(p - 32);
+      else
+        r(i) := s(i);
+      end if;
+    end loop;
+    return r;
+  end function;
 begin
   test_runner: process is
+    variable n : natural := 42;
+    variable r : rec := (1, 2);
+    variable a : integer_vector(1 to 3) := (1, 2, 3);
+    variable vm : value_mirror;
   begin
     test_runner_setup(runner, runner_cfg);
     info("LCS-2016-041: Record Introspection/Type Reflection");
+
+    check_equal(to_upper("hEllo"), "HELLO");
+
+    vm := n'reflect;
+    check_equal(to_string(vm), "42");
+
+    vm := r'reflect;
+    check_equal(to_upper(to_string(vm)), "(X => 1, Y => 2)");
+
+    vm := a'reflect;
+    check_equal(to_string(vm), "(1, 2, 3)");
+
     test_runner_cleanup(runner);
     wait;
   end process test_runner;
