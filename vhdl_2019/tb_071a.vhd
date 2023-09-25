@@ -29,11 +29,14 @@ entity tb_extra_optional_semicolon_on_interface_list is
 end entity;
 
 architecture tb of tb_extra_optional_semicolon_on_interface_list is
+  constant g : natural := 10;
   signal a : bit ;
   signal b : integer ;
 begin
   U_e071a : entity work.e071a
-    port map (
+    generic map (
+      g => g
+    ) port map (
       a => a,
       b => b
     ) ;
