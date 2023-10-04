@@ -17,8 +17,8 @@ package body pack032 is
             constant vpath : string := value'path_name ;
             constant vinst : string := value'instance_name ;
         begin
-            assert vpath /= "" severity failure ;
-            assert vinst /= "" severity failure ;
+            assert vpath = ":tb_path_name_and_shared_variables_and_subprograms:u_e032:tb:t:value" report vpath severity failure ;
+            assert vinst = ":tb_path_name_and_shared_variables_and_subprograms(tb):u_e032@e032(arch):tb:t:value" report vinst severity failure ;
             value := value + 1 ;
         end procedure ;
     end protected body ;
