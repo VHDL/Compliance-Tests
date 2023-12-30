@@ -4,8 +4,10 @@ package P1_059 is
   generic (
     type element_type is private;                         -- any type
     type index_type is (<>);                              -- a discrete type
-    type array_type is array(index_type) of element_type  -- an array type
+    type array_type is array(index_type range <>) of element_type;  -- an array type
+    left_index, right_index : index_type
   );
+  signal s : array_type(left_index to right_index);
 end package;
 
 entity E_059 is
@@ -16,9 +18,12 @@ architecture A1 of E_059 is
     generic map (
       element_type => bit,
       index_type =>   natural,
-      array_type =>   bit_vector
+      array_type =>   bit_vector,
+      left_index => 1,
+      right_index => 5
     );
 begin
+    assert I1.s = "00000";
 end architecture;
 
 package P2_059 is
@@ -50,10 +55,11 @@ package P3_059 is
 end package;
 
 architecture A3 of E_059 is
+  use std.textio.line;
   package I1 is new work.P3_059
     generic map (
       designated_subtype => string,
-      access_type        => std.textio.line
+      access_type        => line
     );
 begin
 end architecture;
@@ -65,15 +71,26 @@ package P4_059 is
   );
   -- example usage of type aliases to create shorter names
   alias designated_subtype is access_type'DESIGNATED_SUBTYPE;  -- alias the implicit type with a name
+  procedure test;
 end package;
 
+package body P4_059 is
+    procedure test is
+        variable p : access_type;
+    begin
+        deallocate(p);
+    end procedure;
+end package body;
+
 architecture A4 of E_059 is
+  use std.textio.line;
   package I2 is new work.P4_059
     generic map (
       -- anonymous => line'DESIGNATED_SUBTYPE, -- implicitly associated; see 6.5.7.2
-      access_type => std.textio.line
+      access_type => line
     );
 begin
+    I2.test;
 end architecture;
 
 package P5_059 is
@@ -81,13 +98,15 @@ package P5_059 is
     type designated_subtype;                      -- any type
     type file_type is file of designated_subtype  -- an file type
   );
+  file f : file_type;
 end package;
 
 architecture A5 of E_059 is
+  use std.textio.text;
   package I1 is new work.P5_059
     generic map (
       designated_subtype => string,
-      file_type          =>  std.textio.line
+      file_type          => text
     );
 begin
 end architecture;
@@ -99,13 +118,15 @@ package P6_059 is
   );
   -- example usage of type aliases to create shorter names
   alias designated_subtype is file_type'DESIGNATED_SUBTYPE;  -- alias the implicit type with a name
+  file f : file_type;
 end package;
 
 architecture A6 of E_059 is
+  use std.textio.text;
   package I2 is new work.P6_059
     generic map (
       -- anonymous => line'DESIGNATED_SUBTYPE, -- implicitly associated; see 6.5.7.2
-      file_type => std.textio.line
+      file_type => text
     );
 begin
 end architecture;
@@ -121,7 +142,6 @@ end entity;
 
 architecture tb of tb_array_type_generics is
 begin
-  U_e059a0 : entity work.e_059(a0) ;
   U_e059a1 : entity work.e_059(a1) ;
   U_e059a2 : entity work.e_059(a2) ;
   U_e059a3 : entity work.e_059(a3) ;
