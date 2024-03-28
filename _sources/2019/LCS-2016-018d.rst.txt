@@ -1,0 +1,7 @@
+LCS-2016-018d
+#############
+
+New attributes - 'designated_type
+
+New Attributes - \'DESINATED_TYPE
+

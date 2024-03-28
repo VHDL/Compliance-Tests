@@ -1,0 +1,7 @@
+LCS-2016-047
+############
+
+Protected Type: Shared Variables On Entity Interface
+
+Protected Type - Shared Variables On Entity Interface
+

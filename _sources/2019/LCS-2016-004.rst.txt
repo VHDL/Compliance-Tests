@@ -1,0 +1,7 @@
+LCS-2016-004
+############
+
+Allow PT methods with AT and FT parms
+
+Allow Protected Type Method Parameters to be Access Types, Protected Types (functions), and File Types
+

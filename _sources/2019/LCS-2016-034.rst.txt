@@ -1,0 +1,7 @@
+LCS-2016-034
+############
+
+Protected Types with Generic Clause
+
+Protected Types with Generic Clause
+

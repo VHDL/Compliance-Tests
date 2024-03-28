@@ -1,0 +1,6 @@
+LCS-2016-012
+############
+
+'IMAGE and TO_STRING for composite types
+
+

@@ -1,0 +1,6 @@
+LCS-2016-014a
+#############
+
+Pointers to Composites of Protected Types
+
+

@@ -1,0 +1,7 @@
+LCS-2016-001
+############
+
+Partially Connected Vectors on Port Map
+
+Allow for vectors to be partially connected in the port map
+

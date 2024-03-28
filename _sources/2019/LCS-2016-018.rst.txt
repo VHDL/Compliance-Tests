@@ -1,0 +1,7 @@
+LCS-2016-018
+############
+
+Attributes for Enumerated Types
+
+Attributes for Enumerated Types
+

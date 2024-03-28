@@ -1,0 +1,6 @@
+LCS-2016-007a
+#############
+
+Sequential Declaration Regions - corresponding short form
+
+

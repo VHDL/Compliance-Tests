@@ -1,0 +1,7 @@
+LCS-2016-002
+############
+
+Allow access and protected type parameters on function interfaces
+
+Allow access and protected type parameters on function interfaces
+

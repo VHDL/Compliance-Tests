@@ -1,0 +1,6 @@
+LCS-2016-059a
+#############
+
+Allow ordering on any scalar array - related to Array Type Generics
+
+

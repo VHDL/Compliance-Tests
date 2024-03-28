@@ -1,0 +1,6 @@
+ISAC-2016-I08
+#############
+
+Repair LRM Section 16.8.2.4.3 Missing Paragraph Text
+
+
