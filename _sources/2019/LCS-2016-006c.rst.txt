@@ -1,0 +1,7 @@
+LCS-2016-006c
+#############
+
+File IO / Directory I/O
+
+TextIO additions
+

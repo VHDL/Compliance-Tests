@@ -1,0 +1,6 @@
+LCS-2016-028
+############
+
+Selected names for types - implementation of external names for types
+
+

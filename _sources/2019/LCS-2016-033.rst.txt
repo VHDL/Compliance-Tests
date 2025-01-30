@@ -1,0 +1,7 @@
+LCS-2016-033
+############
+
+Composition with Protected Types
+
+Composition with Protected Types
+

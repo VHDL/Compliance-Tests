@@ -1,0 +1,7 @@
+LCS-2016-006e
+#############
+
+Allow access to system environment variables (baseline)
+
+Allow access to system environment variables (baseline)
+

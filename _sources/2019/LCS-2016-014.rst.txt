@@ -1,0 +1,6 @@
+LCS-2016-014
+############
+
+Composites of Protected Types
+
+

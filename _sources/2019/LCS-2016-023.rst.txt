@@ -1,0 +1,7 @@
+LCS-2016-023
+############
+
+Relax Library Requirement on Configurations
+
+Relax Library Requirement on Configurations
+
